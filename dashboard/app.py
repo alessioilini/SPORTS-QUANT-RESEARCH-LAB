@@ -322,8 +322,10 @@ elif section == SECTIONS[5]:
         st.stop()
     c1, c2, c3 = st.columns(3)
     model = c1.selectbox("Model", sorted(l.model.unique()))
-    strat = c2.selectbox("Strategy", sorted(l.strategy.unique()))
-    period = c3.selectbox("Period", sorted(l.period.unique()))
+    strats = sorted(l[l.model == model].strategy.unique())          # only combinations that exist
+    strat = c2.selectbox("Strategy", strats, index=strats.index("fixed-1u") if "fixed-1u" in strats else 0)
+    periods = sorted(l[(l.model == model) & (l.strategy == strat)].period.unique(), reverse=True)  # OOS first
+    period = c3.selectbox("Period", periods)
     g = l[(l.model == model) & (l.strategy == strat) & (l.period == period)].sort_values("settle_time")
     if g.empty:
         st.warning("No positions for this combination.")
