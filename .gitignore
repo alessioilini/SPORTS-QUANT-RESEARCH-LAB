@@ -8,3 +8,4 @@ data/processed/
 data/*.sqlite
 data/*.sqlite-*
 .streamlit/secrets.toml
+*.egg-info/
