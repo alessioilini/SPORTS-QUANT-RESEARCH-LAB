@@ -39,6 +39,26 @@ matched on **380/380** matches (`crosscheck_epl_2324_vs_independent_mirror`). Th
 convention was checked on known fixtures: the 2015-10-27 openers (Warriors, Hawks and Bulls at home)
 and 2022 Finals Game 6 (Celtics at home).
 
+## 1b. Current (unpinned) sources — for upcoming matches
+
+These files change daily, so they cannot be SHA-pinned in advance. Each download is recorded with
+`retrieved_at`, `sha256` and `url` in `data/raw/CURRENT_MANIFEST.json` and in the `sources` table
+(`role` = `current-results` or `fixtures`). All access is read-only. Set `SPORTSLAB_OFFLINE=1` to disable it.
+
+| source | used for | how |
+|---|---|---|
+| `https://www.football-data.co.uk/fixtures.csv` | upcoming EPL fixtures + pre-match odds (OBSERVED at download time) | dashboard → Prematch → Upcoming → *Load upcoming fixtures* |
+| `https://www.football-data.co.uk/mmz4281/<YYZZ>/E0.csv` | current EPL season results (same format as history) | *Refresh current-season results* |
+| ESPN scoreboards via `sports-skills` (`nhl`/`nba.get_scoreboard`, `football.get_daily_schedule`, `tennis.get_scoreboard`) | NHL/NBA/tennis schedules; NHL/NBA recent results (one call per day) | *Load recent results via ESPN* |
+| ESPN ATP rankings via `sports-skills tennis.get_rankings` | current ranks for the tennis rank model | fetched at forecast time |
+
+Freshness gate for upcoming forecasts:
+* no results from the current **or** previous season → `INSUFFICIENT_DATA`, and no probabilities are shown;
+* the current season started more than 21 days ago but none of its results are loaded → `STALE_DATA` (probabilities are shown, flagged).
+
+As of 2026-10-31 the historical NHL data ends in 2020 and the NBA data in 2022. NHL/NBA forecasts for upcoming
+games therefore require loading recent results via ESPN first. Until then they are `INSUFFICIENT_DATA` by design.
+
 ## 2. What each sport contains
 
 | field | football (EPL) | hockey (NHL) | basketball (NBA) | tennis (ATP) |
@@ -53,6 +73,11 @@ and 2022 Finals Game 6 (Celtics at home).
 | external forecasts | — | OBSERVED FiveThirtyEight (2021-22 only) | OBSERVED FiveThirtyEight | — |
 
 ### Known gaps (found by the data-quality checks)
+* **Football 2025-26 team names (fixed):** the mirror's 2025-26 file spells 7 clubs differently
+  (`Manchester City`, `Manchester Utd`, `Tottenham Hotspur`, `Newcastle United`, `West Ham United`,
+  `Leeds United`, `Nottingham Forest`). Earlier this split each club's history into two "teams". All names now go
+  through `sportslab.data.teams` (one canonical spelling per club). The new check
+  `team_names_stable_across_seasons` fails if a season introduces more new names than promotion allows.
 * **Football 2025-26:** Pinnacle opening and closing odds are missing in the source file for the 170 matches
   from 2026-01-17 to the end of the season (`odds_coverage_by_book_season` = WARN, 55% coverage). Bet365 and
   market average/max prices are complete. Because of this, the Pinnacle-based backtest and the

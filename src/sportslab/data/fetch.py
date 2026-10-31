@@ -74,3 +74,45 @@ def fetch_all(source_ids: list[str] | None = None, *, pin_new: bool = True, forc
     LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
     LOCK_PATH.write_text(json.dumps(dict(sorted(lock.items())), indent=2) + "\n")
     return manifest
+
+
+# ------------------------------------------------------------------ "current" (unpinned) sources
+# Files that keep changing (current-season results, upcoming fixtures, recent ESPN results).
+# They cannot be SHA-pinned in advance; every download is recorded with its sha256 + retrieved_at.
+CURRENT_MANIFEST_PATH = RAW_DIR / "CURRENT_MANIFEST.json"
+
+
+def load_current_manifest() -> dict[str, dict]:
+    return json.loads(CURRENT_MANIFEST_PATH.read_text()) if CURRENT_MANIFEST_PATH.exists() else {}
+
+
+def current_sources(sport: str, role: str = "current-results") -> dict[str, dict]:
+    return {sid: m for sid, m in load_current_manifest().items()
+            if m.get("sport") == sport and m.get("role") == role and (RAW_DIR / m["path"]).exists()}
+
+
+def register_current(sid: str, *, sport: str, path: str, data: bytes, url: str, original_provider: str,
+                     season: str | None, role: str, notes: str = "") -> dict:
+    """Write bytes to data/raw/<path> and record provenance in CURRENT_MANIFEST.json."""
+    dest = RAW_DIR / path
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_bytes(data)
+    rec = dict(sport=sport, path=path, url=url, original_provider=original_provider, season=season, role=role,
+               retrieved_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+               sha256=sha256_bytes(data), bytes=len(data), status="downloaded", notes=notes)
+    man = load_current_manifest()
+    man[sid] = rec
+    CURRENT_MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
+    CURRENT_MANIFEST_PATH.write_text(json.dumps(man, indent=2) + "\n")
+    return rec
+
+
+def http_get(url: str, timeout: int = 30) -> tuple[bytes | None, str | None]:
+    """GET returning (content, error). Never raises; 'error' explains why data is UNAVAILABLE."""
+    try:
+        r = requests.get(url, timeout=timeout, headers={"User-Agent": "sports-quant-research-lab/0.1 (research)"})
+    except requests.RequestException as e:
+        return None, f"{type(e).__name__}: {e}"[:300]
+    if r.status_code != 200:
+        return None, f"HTTP {r.status_code}"
+    return r.content, None

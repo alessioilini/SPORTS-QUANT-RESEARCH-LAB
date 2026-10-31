@@ -58,3 +58,24 @@ def test_streamlit_server_starts_and_is_healthy():
     finally:
         proc.terminate()
         proc.wait(timeout=20)
+
+
+@pytest.mark.historical
+def test_upcoming_tab_manual_future_match(monkeypatch):
+    """Pick a future match manually -> forecast is computed and its status/probabilities are shown."""
+    monkeypatch.setenv("SPORTSLAB_OFFLINE", "1")
+    from streamlit.testing.v1 import AppTest
+    at = AppTest.from_file(APP, default_timeout=300)
+    at.session_state["section"] = "1. Prematch Analytics"
+    at.session_state["sport"] = "football"
+    at.run()
+    assert not at.exception
+    at.selectbox(key="man_h_football").set_value("Arsenal")
+    at.selectbox(key="man_a_football").set_value("Liverpool")
+    at.button(key="man_add_football").click()
+    at.run()
+    assert not at.exception, [e.message for e in at.exception]
+    text = " ".join(m.value for m in at.markdown)
+    assert "Arsenal vs Liverpool" in text
+    assert any(s in text for s in ("STALE_DATA", "OK"))       # 2026-27 results not loaded here -> STALE_DATA
+    assert any("P(H)" in c for df in at.dataframe for c in df.value.columns)

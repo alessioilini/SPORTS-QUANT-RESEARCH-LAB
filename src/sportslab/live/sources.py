@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 
 from sportslab.live.engine import LiveSnapshot
 
-AVAILABLE, UNAVAILABLE = "AVAILABLE", "UNAVAILABLE"
+AVAILABLE, UNAVAILABLE, NOT_CONNECTED = "AVAILABLE", "UNAVAILABLE", "NOT_CONNECTED"
 
 
 @dataclass
@@ -55,55 +55,114 @@ def _parse_minute(detail: str):
     return None
 
 
+def _state(status: str) -> str:
+    status = (status or "").lower()
+    if status in ("closed", "final", "status_final", "ended", "complete", "completed"):
+        return "final"
+    if status in ("not_started", "scheduled", "status_scheduled", "pre", ""):
+        return "scheduled"
+    return "in_progress"
+
+
+def _side(c: dict) -> str | None:
+    return c.get("home_away") or c.get("homeAway") or c.get("qualifier")
+
+
 def snapshot_from_scoreboard_event(sport: str, ev: dict, fetched_at: datetime) -> LiveSnapshot:
-    """Normalised sports-skills scoreboard event -> LiveSnapshot. Unknown fields stay None."""
-    comps = {c.get("home_away"): c for c in ev.get("competitors", [])}
+    """Normalised sports-skills event (nhl/nba scoreboard, football daily schedule) -> LiveSnapshot.
+    Fields the payload does not carry stay None (the engine then reports INSUFFICIENT_DATA)."""
+    comps = {_side(c): c for c in ev.get("competitors", [])}
     home, away = comps.get("home", {}), comps.get("away", {})
-    status = ev.get("status", "")
-    state = "final" if status in ("closed", "final", "STATUS_FINAL") else (
-        "scheduled" if status in ("not_started", "scheduled", "STATUS_SCHEDULED") else "in_progress")
+    scores = ev.get("scores") or {}
     snap = LiveSnapshot(sport=sport, event_id=f"espn:{ev.get('id')}", source=f"sports-skills/{_SPORT_MODULE[sport]}",
-                        fetched_at=fetched_at, source_updated_at=None, state=state,
-                        home_score=home.get("score"), away_score=away.get("score"))
+                        fetched_at=fetched_at, source_updated_at=None, state=_state(ev.get("status", "")),
+                        home_score=home.get("score", scores.get("home")),
+                        away_score=away.get("score", scores.get("away")))
     detail = ev.get("status_detail", "")
     if sport in ("hockey", "basketball"):
         snap.period, snap.clock_remaining_s = _parse_clock(detail)
     elif sport == "football":
-        snap.minute = _parse_minute(detail)
+        snap.minute = _parse_minute(detail)     # daily schedule carries no clock -> stays None
+    snap.stats = {"home": (home.get("team") or {}).get("name") or home.get("name"),
+                  "away": (away.get("team") or {}).get("name") or away.get("name"), "status_detail": detail,
+                  "start_time": ev.get("start_time"), "competition": (ev.get("competition") or {}).get("id")}
     return snap
 
 
+def _set_won(a: int, b: int) -> bool:
+    return (a >= 6 and a - b >= 2) or a == 7
+
+
+def snapshot_from_tennis_match(m: dict, fetched_at: datetime, tournament: str = "") -> LiveSnapshot:
+    """sports-skills tennis match (competitors[].set_scores, serving) -> LiveSnapshot.
+    The feed has no point score inside the current game -> points stay None (UNKNOWN)."""
+    c = m.get("competitors", [])
+    p1, p2 = (c + [{}, {}])[:2]
+    s1 = [x.get("games", 0) for x in p1.get("set_scores", [])]
+    s2 = [x.get("games", 0) for x in p2.get("set_scores", [])]
+    state = _state(m.get("status", ""))
+    n = min(len(s1), len(s2))
+    done = n if state == "final" else max(n - 1, 0)          # last listed set is in progress
+    sets_h = sum(1 for a, b in zip(s1[:done], s2[:done]) if _set_won(a, b))
+    sets_a = sum(1 for a, b in zip(s1[:done], s2[:done]) if _set_won(b, a))
+    in_prog = state == "in_progress" and n > done
+    serving = True if p1.get("serving") else (False if p2.get("serving") else None)
+    return LiveSnapshot(sport="tennis", event_id=f"espn:{m.get('id')}", source="sports-skills/tennis",
+                        fetched_at=fetched_at, source_updated_at=None, state=state,
+                        sets_home=sets_h, sets_away=sets_a,
+                        games_home=s1[-1] if in_prog else (0 if state == "in_progress" else None),
+                        games_away=s2[-1] if in_prog else (0 if state == "in_progress" else None),
+                        points_home=None, points_away=None, home_serving=serving, best_of=None,
+                        stats={"home": p1.get("name"), "away": p2.get("name"), "tournament": tournament,
+                               "round": m.get("round"), "status_detail": m.get("status_detail"),
+                               "start_time": m.get("date"), "type": p1.get("type")})
+
+
+# module, function, how to extract events
+_FEEDS = {"football": ("football", "get_daily_schedule"), "hockey": ("nhl", "get_scoreboard"),
+          "basketball": ("nba", "get_scoreboard"), "tennis": ("tennis", "get_scoreboard")}
+
+
 class SportsSkillsLive:
-    """Read-only scoreboard reader. Network failures -> UNAVAILABLE (never fabricated)."""
+    """Read-only reader of the installed sports-skills package. Failures -> UNAVAILABLE (never fabricated)."""
 
     def __init__(self, sport: str):
         self.sport = sport
 
     def fetch(self, **params) -> SourceResult:
         fetched = _now()
-        src = f"sports-skills/{_SPORT_MODULE[self.sport]}.get_scoreboard"
+        module, fn = _FEEDS[self.sport]
+        src = f"sports-skills/{module}.{fn}"
         try:
             import importlib
-            mod = importlib.import_module(f"sports_skills.{_SPORT_MODULE[self.sport]}")
-            data = mod.get_scoreboard(**params)
+            data = getattr(importlib.import_module(f"sports_skills.{module}"), fn)(**params)
         except Exception as e:  # noqa: BLE001 — any import/network error means unavailable
             return SourceResult(src, UNAVAILABLE, fetched, error=f"{type(e).__name__}: {e}"[:300])
+        return self.parse(src, data, fetched)
+
+    def parse(self, src: str, data, fetched: datetime) -> SourceResult:
         if not isinstance(data, dict) or data.get("status") is False or data.get("error"):
             msg = (data or {}).get("message") if isinstance(data, dict) else str(data)
             return SourceResult(src, UNAVAILABLE, fetched, error=str(msg)[:300])
         payload = data.get("data", data)
-        events = payload.get("events", []) if isinstance(payload, dict) else []
-        snaps = [snapshot_from_scoreboard_event(self.sport, e, fetched) for e in events]
-        return SourceResult(src, AVAILABLE, fetched, snaps, raw_count=len(events))
+        if not isinstance(payload, dict):
+            return SourceResult(src, UNAVAILABLE, fetched, error="unexpected payload shape")
+        if self.sport == "tennis":
+            snaps = [snapshot_from_tennis_match(m, fetched, t.get("name", ""))
+                     for t in payload.get("tournaments", []) for d in t.get("draws", [])
+                     for m in d.get("matches", [])]
+        else:
+            snaps = [snapshot_from_scoreboard_event(self.sport, e, fetched) for e in payload.get("events", [])]
+        return SourceResult(src, AVAILABLE, fetched, snaps, raw_count=len(snaps))
 
 
 class InferSports:
-    """Placeholder for the InferSports read-only MCP. Not connected — see config/mcp/."""
+    """Placeholder for the InferSports read-only MCP. Deliberately not connected — see config/mcp/."""
 
     def fetch(self, **_) -> SourceResult:
-        return SourceResult("infersports-mcp", UNAVAILABLE, _now(),
-                            error="not connected: official endpoint unverified; infersports.com blocked by "
-                                  "egress policy (HTTP 403). See config/mcp/infersports.DISABLED.json")
+        return SourceResult("infersports-mcp", NOT_CONNECTED, _now(),
+                            error="not connected by design: the official endpoint could not be verified. "
+                                  "To enable, follow config/mcp/infersports.DISABLED.json")
 
 
 def parse_nhl_gamecenter(pbp: dict, fetched_at: datetime, source_updated_at: datetime | None = None) -> LiveSnapshot:

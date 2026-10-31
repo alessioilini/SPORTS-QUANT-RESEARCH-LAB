@@ -38,6 +38,21 @@ Analytics, Probability Models, Forecast History, Backtesting, Virtual Bankroll, 
 Data Quality. The validated artifacts are committed under `reports/artifacts/`, so after `fetch_data` +
 `build_db` (about 1 minute) the dashboard works without re-running the 20-minute validation.
 
+## Upcoming matches (prematch forecasts for future games)
+
+Dashboard → **1. Prematch Analytics → 🗓 Upcoming matches**:
+1. *(once per session)* **Update data before forecasting**
+   - football: *Refresh current-season results* (football-data.co.uk)
+   - NHL/NBA: *Load recent results via ESPN* (the historical files end in 2020/2022)
+2. **Load upcoming fixtures**, or add a match manually.
+3. Pick a match. You get each model's probabilities, the calibrated ensemble, the de-vigged market (football,
+   when odds are published), model disagreement, team data freshness, sources, and a `Save to forecast log`
+   button. Logged forecasts are scored automatically once the result is in the DB.
+
+Status is `OK`, `STALE_DATA` (current-season results missing) or `INSUFFICIENT_DATA` (no probabilities shown).
+The future match is appended to history with `forecast_time = now` and goes through the same validated
+walk-forward models, so no information from after "now" can leak in.
+
 ## Layout
 
 ```

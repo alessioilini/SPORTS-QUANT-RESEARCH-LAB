@@ -23,6 +23,9 @@ from sportslab import DISCLAIMER  # noqa: E402
 from sportslab.config import ARTIFACTS_DIR, DB_PATH, ROOT as LAB_ROOT  # noqa: E402
 from sportslab.ev.odds import explain  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import upcoming_page  # noqa: E402
+
 st.set_page_config(page_title="Sports Quant Research Lab", page_icon="📊", layout="wide")
 
 SECTIONS = ["1. Prematch Analytics", "2. Live Match Analytics", "3. Probability Models", "4. Forecast History",
@@ -73,45 +76,49 @@ st.caption("⚠️ " + DISCLAIMER)
 # ============================================================================= 1. PREMATCH
 if section == SECTIONS[0]:
     st.header("Prematch Analytics")
-    preds = art("predictions")
-    need(preds, "predictions")
-    p = preds[(preds.sport == sport) & (preds.split == "test")]
-    ex = art_json("example_forecast.json")
-    if ex and sport == "football":
-        with st.expander("Worked example forecast with data sources (scripts/example_forecast.py)", expanded=True):
-            st.json(ex, expanded=False)
-    teams = sorted(set(p.home) | set(p.away))
-    c1, c2 = st.columns(2)
-    team = c1.selectbox("Team / player", teams, key="pm_team")
-    ev = p[(p.home == team) | (p.away == team)].drop_duplicates("event_id").sort_values("event_time")
-    labels_ev = {r.event_id: f"{r.event_time:%Y-%m-%d} {r.home} vs {r.away}" for r in ev.itertuples()}
-    eid = c2.selectbox("Out-of-sample match", list(labels_ev), format_func=labels_ev.get, key="pm_event")
-    rows = p[p.event_id == eid]
-    show = rows[["model"] + pcols(sport)].dropna().sort_values("model")
-    st.subheader(f"{labels_ev[eid]} — outcome: {rows.outcome.iloc[0]}")
-    long = show.melt(id_vars="model", var_name="outcome", value_name="probability")
-    fig = px.bar(long, x="probability", y="model", color="outcome", orientation="h", barmode="stack", height=520)
-    st.plotly_chart(fig, use_container_width=True)
-    st.dataframe(show.style.format({c: "{:.3f}" for c in pcols(sport)}), use_container_width=True)
-    # odds & EV explanation (educational)
-    odds = db("SELECT bookmaker, snapshot, selection, price, observed_at, observed_at_precision, source_id "
-              "FROM odds WHERE event_id = ?", (eid,))
-    if not odds.empty:
-        st.markdown("**Historical market prices (OBSERVED)**")
-        st.dataframe(odds, use_container_width=True)
-        pin = odds[(odds.bookmaker == "pinnacle") & (odds.snapshot.isin(["opening", "single"]))]
-        pin = pin.set_index("selection").reindex(LABELS[sport])
-        model_name = st.selectbox("Model for the EV explanation", show.model.tolist(),
-                                  index=max(0, show.model.tolist().index("ensemble:mean+temp"))
-                                  if "ensemble:mean+temp" in show.model.tolist() else 0)
-        mp = show.set_index("model").loc[model_name, pcols(sport)].to_numpy(float)
-        if pin.price.notna().all():
-            st.markdown("**Market maths explained (education only — not a recommendation)**")
-            st.code(explain(pin.price.to_numpy(), mp, LABELS[sport]).text)
-    st.markdown("**Provenance**")
-    st.dataframe(db("SELECT e.event_id, e.event_time, e.event_time_precision, e.forecast_time, e.forecast_time_rule, "
-                    "e.source_id, e.retrieved_at, r.available_at AS result_available_at FROM events e "
-                    "LEFT JOIN results r USING(event_id) WHERE e.event_id = ?", (eid,)), use_container_width=True)
+    tab_up, tab_hist = st.tabs(["🗓 Upcoming matches", "📚 Historical out-of-sample"])
+    with tab_up:
+        upcoming_page.render(sport)
+    with tab_hist:
+        preds = art("predictions")
+        need(preds, "predictions")
+        p = preds[(preds.sport == sport) & (preds.split == "test")]
+        ex = art_json("example_forecast.json")
+        if ex and sport == "football":
+            with st.expander("Worked example forecast with data sources (scripts/example_forecast.py)", expanded=True):
+                st.json(ex, expanded=False)
+        teams = sorted(set(p.home) | set(p.away))
+        c1, c2 = st.columns(2)
+        team = c1.selectbox("Team / player", teams, key="pm_team")
+        ev = p[(p.home == team) | (p.away == team)].drop_duplicates("event_id").sort_values("event_time")
+        labels_ev = {r.event_id: f"{r.event_time:%Y-%m-%d} {r.home} vs {r.away}" for r in ev.itertuples()}
+        eid = c2.selectbox("Out-of-sample match", list(labels_ev), format_func=labels_ev.get, key="pm_event")
+        rows = p[p.event_id == eid]
+        show = rows[["model"] + pcols(sport)].dropna().sort_values("model")
+        st.subheader(f"{labels_ev[eid]} — outcome: {rows.outcome.iloc[0]}")
+        long = show.melt(id_vars="model", var_name="outcome", value_name="probability")
+        fig = px.bar(long, x="probability", y="model", color="outcome", orientation="h", barmode="stack", height=520)
+        st.plotly_chart(fig, use_container_width=True)
+        st.dataframe(show.style.format({c: "{:.3f}" for c in pcols(sport)}), use_container_width=True)
+        # odds & EV explanation (educational)
+        odds = db("SELECT bookmaker, snapshot, selection, price, observed_at, observed_at_precision, source_id "
+                  "FROM odds WHERE event_id = ?", (eid,))
+        if not odds.empty:
+            st.markdown("**Historical market prices (OBSERVED)**")
+            st.dataframe(odds, use_container_width=True)
+            pin = odds[(odds.bookmaker == "pinnacle") & (odds.snapshot.isin(["opening", "single"]))]
+            pin = pin.set_index("selection").reindex(LABELS[sport])
+            model_name = st.selectbox("Model for the EV explanation", show.model.tolist(),
+                                      index=max(0, show.model.tolist().index("ensemble:mean+temp"))
+                                      if "ensemble:mean+temp" in show.model.tolist() else 0)
+            mp = show.set_index("model").loc[model_name, pcols(sport)].to_numpy(float)
+            if pin.price.notna().all():
+                st.markdown("**Market maths explained (education only — not a recommendation)**")
+                st.code(explain(pin.price.to_numpy(), mp, LABELS[sport]).text)
+        st.markdown("**Provenance**")
+        st.dataframe(db("SELECT e.event_id, e.event_time, e.event_time_precision, e.forecast_time, e.forecast_time_rule, "
+                        "e.source_id, e.retrieved_at, r.available_at AS result_available_at FROM events e "
+                        "LEFT JOIN results r USING(event_id) WHERE e.event_id = ?", (eid,)), use_container_width=True)
 
 # ============================================================================= 2. LIVE
 elif section == SECTIONS[1]:
@@ -129,8 +136,18 @@ elif section == SECTIONS[1]:
                 r = src.fetch()
                 st.write({"source": r.source, "status": r.status, "events": r.raw_count, "error": r.error,
                           "fetched_at": r.fetched_at.isoformat()})
-        st.caption("In this environment ESPN/NBA CDN and InferSports are blocked by the network policy: the engine "
-                   "below is driven by manual / replayed snapshots.")
+                if r.snapshots:
+                    st.dataframe(pd.DataFrame([{"event": x.event_id, "state": x.state,
+                                                "home": (x.stats or {}).get("home"), "away": (x.stats or {}).get("away"),
+                                                "score": f"{x.home_score}-{x.away_score}" if sport != "tennis" else
+                                                f"sets {x.sets_home}-{x.sets_away} games {x.games_home}-{x.games_away}",
+                                                "detail": (x.stats or {}).get("status_detail")} for x in r.snapshots]),
+                                 use_container_width=True, hide_index=True)
+                elif r.status == "AVAILABLE":
+                    st.caption("Source reachable, but it returned no events for today.")
+        st.caption("UNAVAILABLE = the source could not be reached from this machine; NOT_CONNECTED = deliberately not "
+                   "configured. Scoreboards carry no source timestamp, so live forecasts from them are marked DELAYED "
+                   "(freshness unverified). The engine below can always be driven by a manual snapshot.")
     now = datetime.now(timezone.utc)
     c = st.columns(3)
     delay = c[0].slider("Feed delay (seconds since source update)", 0, 900, 10)

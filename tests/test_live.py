@@ -8,7 +8,7 @@ import pytest
 
 from sportslab.live import tennis as tn
 from sportslab.live.engine import DELAYED, INSUFFICIENT, OK, LiveEngine, LiveSnapshot, PrematchPrior
-from sportslab.live.sources import (UNAVAILABLE, InferSports, SportsSkillsLive, _parse_clock, _parse_minute,
+from sportslab.live.sources import (NOT_CONNECTED, UNAVAILABLE, InferSports, SportsSkillsLive, _parse_clock, _parse_minute,
                                     parse_nhl_gamecenter, snapshot_from_scoreboard_event)
 
 NOW = datetime(2026, 10, 31, 20, 0, tzinfo=timezone.utc)
@@ -193,4 +193,5 @@ def test_live_sources_fail_closed():
     assert r.status in ("AVAILABLE", "UNAVAILABLE")
     if r.status == UNAVAILABLE:
         assert r.error and not r.snapshots
-    assert InferSports().fetch().status == UNAVAILABLE
+    inf = InferSports().fetch()
+    assert inf.status == NOT_CONNECTED and "not connected by design" in inf.error

@@ -137,3 +137,11 @@ oversubscription).
 6. The first backtest used a 100-unit bankroll, so flat strategies hit cash limits. It now uses a 1,000-unit bankroll, and the cross-check runs the real simulator.
 7. Pinnacle odds are missing for the second half of 2025-26. This is detected (WARN), documented, and handled: the example forecast picks a match with complete prices, and NaN odds are rejected by `implied_probabilities`.
 8. The dashboard log-loss bar chart hid the differences between models. It was replaced by a point + CI plot (checked with a Playwright screenshot).
+9. **Team-name mismatch in the 2025-26 football file** (found while building upcoming-match support): 7 clubs were
+   spelled differently, which reset their ratings in the 2025-26 test season. Fixed with canonical names. A new
+   quality check catches this, and validation, backtests and reports were **re-run** afterwards.
+10. Live adapter: tennis scoreboards (`tournaments → draws → matches`) and the football daily schedule
+    (`qualifier`, no `get_scoreboard`) were parsed with the wrong shape, giving "AVAILABLE, 0 events". Fixed and tested.
+    InferSports is now reported as `NOT_CONNECTED` (by design) instead of a misleading "HTTP 403" message.
+11. macOS setup: Python ≥ 3.12 is selected automatically, and stale 3.9 venvs are rebuilt. The skill installer
+    retries, shows git errors, and verifies skills offline when GitHub is unreachable.

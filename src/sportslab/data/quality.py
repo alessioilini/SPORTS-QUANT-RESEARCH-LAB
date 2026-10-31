@@ -52,6 +52,17 @@ def run_checks(t: dict[str, pd.DataFrame]) -> pd.DataFrame:
                              status="WARN" if len(gaps) else "PASS", value=str(len(gaps)),
                              detail="; ".join(f"{b}/{sn}/{se}: {v:.0%}" for (b, sn, se), v in gaps.items())[:400]
                              or "complete"))
+        if sport in ("football", "hockey", "basketball"):
+            seen, worst = set(), (None, 0, [])
+            for season, g in e[e.competition.isin(["EPL", "NHL", "NBA"])].sort_values("event_time").groupby("season", sort=True):
+                teams = set(g.home) | set(g.away)
+                new = sorted(teams - seen) if seen else []
+                if len(new) > worst[1]:
+                    worst = (season, len(new), new)
+                seen |= teams
+            limit = 3 if sport == "football" else 1      # promotion / expansion
+            rows.append(_row("team_names_stable_across_seasons", sport, worst[1] <= limit, worst[1],
+                             f"max new names in one season: {worst[0]} {worst[2][:8]}"))
         per_season = e.groupby("season").size()
         rows.append(_row("events_per_season", sport, True, int(per_season.min()),
                          "; ".join(f"{k}:{v}" for k, v in per_season.items())))

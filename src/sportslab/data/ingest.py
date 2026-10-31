@@ -28,8 +28,9 @@ import numpy as np
 import pandas as pd
 
 from sportslab.config import OBSERVED, RAW_DIR, UNKNOWN
-from sportslab.data.fetch import load_manifest
+from sportslab.data.fetch import current_sources, load_current_manifest, load_manifest
 from sportslab.data.sources import REGISTRY
+from sportslab.data.teams import canonical_football, canonical_nba, canonical_nhl
 
 UTC = ZoneInfo("UTC")
 LONDON = ZoneInfo("Europe/London")
@@ -78,12 +79,16 @@ def ingest_football() -> dict[str, pd.DataFrame]:
                  "AST": ("away", "shots_on_target"), "HC": ("home", "corners"), "AC": ("away", "corners"),
                  "HF": ("home", "fouls"), "AF": ("away", "fouls"), "HY": ("home", "yellow"),
                  "AY": ("away", "yellow"), "HR": ("home", "red"), "AR": ("away", "red")}
-    for sid, src in REGISTRY.items():
-        if src.sport != "football" or src.role != "primary":
-            continue
-        df = _read(sid)
+    files = [(sid, src.season, _read(sid), _retrieved(sid)) for sid, src in REGISTRY.items()
+             if src.sport == "football" and src.role == "primary"]
+    files += [(sid, m["season"], pd.read_csv(RAW_DIR / m["path"], encoding="latin-1"), m["retrieved_at"])
+              for sid, m in current_sources("football").items()]
+    for sid, season, df, retrieved in files:
         df = df.dropna(subset=["HomeTeam", "AwayTeam", "Date"])
-        retrieved = _retrieved(sid)
+        if "Div" in df:
+            df = df[df.Div == "E0"]
+        df["HomeTeam"] = df.HomeTeam.map(canonical_football)   # one spelling per club across sources
+        df["AwayTeam"] = df.AwayTeam.map(canonical_football)
         has_time = "Time" in df.columns
         for _, r in df.iterrows():
             d = datetime.strptime(r["Date"], "%d/%m/%Y" if len(str(r["Date"])) == 10 else "%d/%m/%y")
@@ -96,7 +101,7 @@ def ingest_football() -> dict[str, pd.DataFrame]:
                 prec = "day"
             odds_obs = football_odds_observed_at(kickoff)
             eid = f"FB-EPL-{kickoff:%Y%m%d}-{slug(r['HomeTeam'])}-{slug(r['AwayTeam'])}"
-            ev.append(dict(event_id=eid, sport="football", competition="EPL", season=src.season,
+            ev.append(dict(event_id=eid, sport="football", competition="EPL", season=season,
                            event_time=iso(kickoff), event_time_precision=prec, forecast_time=iso(odds_obs),
                            forecast_time_rule="opening-odds collection instant (Fri/Tue 16:00 local, approx)",
                            home=r["HomeTeam"], away=r["AwayTeam"], neutral=0,
@@ -150,18 +155,21 @@ def _na_times(date: pd.Timestamp):
 
 def ingest_hockey() -> dict[str, pd.DataFrame]:
     ev, res, ext, cov = [], [], [], []
-    for sid, src in REGISTRY.items():
-        if src.sport != "hockey" or src.role != "primary":
-            continue
-        df = _read(sid)
+    files = [(sid, src.season, _read(sid), _retrieved(sid)) for sid, src in REGISTRY.items()
+             if src.sport == "hockey" and src.role == "primary"]
+    files += [(sid, m["season"], pd.read_csv(RAW_DIR / m["path"]), m["retrieved_at"])
+              for sid, m in current_sources("hockey").items()]
+    for sid, season, df, retrieved in files:
         df.columns = ["Date", "Visitor", "VG", "Home", "HG", "OTSO", *df.columns[6:]]
-        retrieved = _retrieved(sid)
+        df["Home"], df["Visitor"] = df.Home.map(canonical_nhl), df.Visitor.map(canonical_nhl)
         missing = int(df[["VG", "HG"]].isna().any(axis=1).sum())
         df = df.dropna(subset=["VG", "HG"])
         for _, r in df.iterrows():
             et, ft, av = _na_times(pd.Timestamp(r["Date"]))
             eid = f"HK-NHL-{et:%Y%m%d}-{slug(r['Home'])}-{slug(r['Visitor'])}"
-            ev.append(dict(event_id=eid, sport="hockey", competition="NHL", season=src.season, event_time=iso(et),
+            row_season = season if ".." not in str(season) else (
+                f"{et.year if et.month >= 9 else et.year - 1}-{(et.year + (1 if et.month >= 9 else 0)) % 100:02d}")
+            ev.append(dict(event_id=eid, sport="hockey", competition="NHL", season=row_season, event_time=iso(et),
                            event_time_precision="day", forecast_time=iso(ft), forecast_time_rule=NA_RULE,
                            home=r["Home"], away=r["Visitor"], neutral=0, source_id=sid, retrieved_at=retrieved))
             hg, vg = int(r["HG"]), int(r["VG"])
@@ -196,12 +204,8 @@ def ingest_hockey() -> dict[str, pd.DataFrame]:
                 coverage=pd.DataFrame(cov))
 
 
-# --------------------------------------------------------------------------- basketball
-def ingest_basketball() -> dict[str, pd.DataFrame]:
-    ev, res, ext, cov = [], [], [], []
-    sid = "basketball_nba_538"
-    df = _read(sid)
-    retrieved = _retrieved(sid)
+def _basketball_rows(df: pd.DataFrame, sid: str, retrieved):
+    ev, res, ext = [], [], []
     for _, r in df.iterrows():
         et, ft, av = _na_times(pd.Timestamp(r["date"]))
         eid = f"BB-NBA-{et:%Y%m%d}-{slug(r['team1'])}-{slug(r['team2'])}"
@@ -212,9 +216,24 @@ def ingest_basketball() -> dict[str, pd.DataFrame]:
         res.append(dict(event_id=eid, outcome="H" if r["prob1_outcome"] == 1 else "A", completed=1,
                         decided_by=UNKNOWN, available_at=iso(av), source_id=sid, retrieved_at=retrieved))
         for sel, p in (("H", r["prob1"]), ("A", r["prob2"])):
+            if pd.isna(p):
+                continue
             ext.append(dict(event_id=eid, provider="fivethirtyeight", selection=sel, prob=float(p),
                             available_at=iso(ft), available_at_precision="approx (published pre-game)",
                             source_id=sid, retrieved_at=retrieved))
+    return ev, res, ext
+
+
+# --------------------------------------------------------------------------- basketball
+def ingest_basketball() -> dict[str, pd.DataFrame]:
+    ev, res, ext, cov = [], [], [], []
+    files = [("basketball_nba_538", _read("basketball_nba_538"), _retrieved("basketball_nba_538"))]
+    files += [(sid, pd.read_csv(RAW_DIR / m["path"]), m["retrieved_at"]) for sid, m in current_sources("basketball").items()]
+    for sid, df, retrieved in files:
+        df["team1"], df["team2"] = df.team1.map(canonical_nba), df.team2.map(canonical_nba)
+        ev_, res_, ext_ = _basketball_rows(df, sid, retrieved)
+        ev += ev_; res += res_; ext += ext_
+    sid = "basketball_nba_538"
     cov += [dict(sport="basketball", source_id=sid, field=f, status=s, note=n) for f, s, n in [
         ("result", OBSERVED, "winner only, no score"), ("team1_is_home", OBSERVED,
                                                          "verified on 2015-10-27 openers and 2022 Finals G6"),
@@ -293,6 +312,12 @@ def ingest_tennis() -> dict[str, pd.DataFrame]:
 def ingest_sources_table() -> pd.DataFrame:
     man = load_manifest()
     rows = []
+    for sid, m in load_current_manifest().items():
+        rows.append(dict(source_id=sid, sport=m["sport"], kind=m["role"], url=m["url"],
+                         original_provider=m["original_provider"], host_repo="(direct, unpinned: changes over time)",
+                         license_note="see DATA_SOURCES.md", season=m.get("season"), role=m["role"],
+                         notes=m.get("notes", ""), retrieved_at=m["retrieved_at"], sha256=m["sha256"],
+                         bytes=m["bytes"], status=m["status"]))
     for sid, s in REGISTRY.items():
         m = man.get(sid, {})
         rows.append(dict(source_id=sid, sport=s.sport, kind=s.kind, url=s.url, original_provider=s.original_provider,
