@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T21:16:43+00:00",
+  "generated_at": "2026-10-31T22:24:35+00:00",
   "installed": [
     {
       "name": "football-data",
@@ -47,7 +47,7 @@
       "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
       "path": "skills/metadata",
       "sha256": "696011d7c84e59631626f1f1eb7ccbfaadf763d15060eed195eb37a80dca19b7",
-      "status": "replaced"
+      "status": "unchanged"
     },
     {
       "name": "sports-news",
