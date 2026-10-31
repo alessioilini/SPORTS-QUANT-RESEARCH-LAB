@@ -11,6 +11,8 @@ virtual bankroll**.
 
 ## Quick start
 
+Requires **Python ≥ 3.12** (macOS ships 3.9: `brew install python@3.13` or the python.org installer). `setup_env.sh` finds a suitable interpreter, rebuilds a `.venv` made with an older one, and stops with instructions if none is found.
+
 ```bash
 bash scripts/setup_env.sh
 ```

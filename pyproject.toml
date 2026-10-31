@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "sportslab"
 version = "0.1.0"
 description = "Sports Quant Research Lab: point-in-time sports data, probabilistic models, virtual-bankroll research simulations"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 
 [tool.setuptools.packages.find]
