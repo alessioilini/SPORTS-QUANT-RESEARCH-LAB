@@ -24,7 +24,7 @@ such.
 | Live engine | ✅ tested (synthetic + real NHL payload + real EPL half-time data) · live feeds unavailable here | `tests/test_live.py` |
 | Virtual backtests + journal | ✅ append-only journal (SQLite triggers) | `tests/test_backtest.py`, `tests/test_models_mc_store.py` |
 | Streamlit dashboard | ✅ 8 sections × 4 sports render without exceptions; server health check OK | `tests/test_dashboard.py` |
-| Test suite | ✅ **105 passed**, 0 failed, 0 skipped | `pytest` |
+| Test suite | ✅ **117 passed**, 0 failed, 0 skipped | `pytest` |
 
 ## 1. Environment check (stage 1)
 
@@ -111,7 +111,7 @@ Details are in `DATA_SOURCES.md` §5. To allow these hosts, change the environme
 
 ## 7. Tests (stage 9)
 
-`pytest` → **105 passed in ~40 s** (`OMP_NUM_THREADS=1` is set in `tests/conftest.py` to avoid OpenMP
+`pytest` → **117 passed in ~55 s** (`OMP_NUM_THREADS=1` is set in `tests/conftest.py` to avoid OpenMP
 oversubscription).
 
 | area | file | what it proves |

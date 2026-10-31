@@ -10,31 +10,31 @@
         "refits": 0
       },
       "elo": {
-        "seconds": 2.0,
+        "seconds": 2.2,
         "refits": 0
       },
       "dixon-coles": {
-        "seconds": 5.0,
+        "seconds": 4.7,
         "refits": 234
       },
       "poisson": {
-        "seconds": 4.8,
+        "seconds": 4.7,
         "refits": 234
       },
       "bayes:gamma-poisson": {
-        "seconds": 2.8,
+        "seconds": 2.7,
         "refits": 0
       },
       "logistic": {
-        "seconds": 7.6,
+        "seconds": 8.6,
         "refits": 68
       },
       "gradient-boosting": {
-        "seconds": 32.6,
+        "seconds": 33.5,
         "refits": 68
       },
       "market:pinnacle-opening": {
-        "seconds": 1.0,
+        "seconds": 1.2,
         "refits": 0
       }
     },
@@ -44,23 +44,23 @@
         "refits": 0
       },
       "baseline:base-rate": {
-        "seconds": 3.0,
+        "seconds": 2.9,
         "refits": 0
       },
       "elo": {
-        "seconds": 6.0,
+        "seconds": 5.8,
         "refits": 0
       },
       "dixon-coles": {
-        "seconds": 9.9,
-        "refits": 221
-      },
-      "poisson": {
         "seconds": 10.1,
         "refits": 221
       },
+      "poisson": {
+        "seconds": 9.8,
+        "refits": 221
+      },
       "bayes:gamma-poisson": {
-        "seconds": 8.8,
+        "seconds": 8.7,
         "refits": 0
       },
       "bayes:gaussian-rating": {
@@ -68,25 +68,25 @@
         "refits": 0
       },
       "logistic": {
-        "seconds": 20.6,
+        "seconds": 20.5,
         "refits": 59
       },
       "gradient-boosting": {
-        "seconds": 50.5,
+        "seconds": 31.1,
         "refits": 59
       }
     },
     "basketball": {
       "baseline:uniform": {
-        "seconds": 2.5,
+        "seconds": 2.4,
         "refits": 0
       },
       "baseline:base-rate": {
-        "seconds": 2.6,
+        "seconds": 2.4,
         "refits": 0
       },
       "elo": {
-        "seconds": 5.3,
+        "seconds": 5.5,
         "refits": 0
       },
       "bayes:gaussian-rating": {
@@ -94,21 +94,21 @@
         "refits": 0
       },
       "logistic": {
-        "seconds": 21.6,
+        "seconds": 17.0,
         "refits": 53
       },
       "gradient-boosting": {
-        "seconds": 530.7,
+        "seconds": 26.2,
         "refits": 53
       },
       "external:fivethirtyeight": {
-        "seconds": 3.2,
+        "seconds": 3.1,
         "refits": 0
       }
     },
     "tennis": {
       "baseline:uniform": {
-        "seconds": 2.6,
+        "seconds": 2.5,
         "refits": 0
       },
       "baseline:base-rate": {
@@ -116,23 +116,23 @@
         "refits": 0
       },
       "elo": {
-        "seconds": 6.8,
+        "seconds": 7.0,
         "refits": 0
       },
       "bayes:gaussian-rating": {
-        "seconds": 10.8,
+        "seconds": 11.4,
         "refits": 0
       },
       "logistic": {
-        "seconds": 21.9,
+        "seconds": 22.7,
         "refits": 50
       },
       "gradient-boosting": {
-        "seconds": 33.6,
+        "seconds": 32.9,
         "refits": 50
       },
       "baseline:rank-logit": {
-        "seconds": 24.3,
+        "seconds": 22.6,
         "refits": 50
       }
     }
@@ -185,24 +185,24 @@
         "n": 760,
         "live_ht": {
           "n": 760,
-          "log_loss": 0.865733829424456,
-          "brier": 0.507106124544694,
-          "accuracy": 0.6171052631578947,
-          "ece": 0.046796987615367824,
-          "rps": 0.16412235761491992
+          "log_loss": 0.8583137386121238,
+          "brier": 0.5042523130556124,
+          "accuracy": 0.6144736842105263,
+          "ece": 0.045047712790186434,
+          "rps": 0.1624267625551964
         },
         "prematch": {
           "n": 760,
-          "log_loss": 1.0463879931151203,
-          "brier": 0.6189404512935565,
-          "accuracy": 0.4881578947368421,
-          "ece": 0.0357918288556274,
-          "rps": 0.21273825437755575
+          "log_loss": 1.012997621482293,
+          "brier": 0.6048474579660914,
+          "accuracy": 0.4921052631578947,
+          "ece": 0.03467979220134759,
+          "rps": 0.20699472557225335
         },
         "diff_ll": {
-          "mean_diff": -0.18065416369066425,
-          "lo": -0.23184759424390983,
-          "hi": -0.13044098520638597,
+          "mean_diff": -0.15468388287016951,
+          "lo": -0.2005636138456328,
+          "hi": -0.1090809886951263,
           "p_better": 1.0
         }
       },
@@ -260,7 +260,7 @@
   },
   "montecarlo": {
     "max_abs_err_vs_analytic": 0.005756361544125094,
-    "mean_abs_err": 0.002618352092713673,
+    "mean_abs_err": 0.0026652675435632927,
     "n_matches": 50,
     "sims_per_match": 20000,
     "same_seed_identical": true,
@@ -270,5 +270,5 @@
     "sigma_full": 11.583203684254755,
     "n_games": 14208
   },
-  "runtime_seconds": 1201.3
+  "runtime_seconds": 673.7
 }

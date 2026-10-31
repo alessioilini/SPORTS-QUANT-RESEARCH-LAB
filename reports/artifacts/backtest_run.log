@@ -1,0 +1,93 @@
+   sport                   model               period                    strategy  n_positions  virtual_roi  virtual_roi_ci_lo  virtual_roi_ci_hi  virtual_pnl  max_drawdown  hit_rate  clv_mean
+football      ensemble:mean+temp in-sample(train+val)                    fixed-1u         1564       -0.051             -0.127              0.025      -80.350         0.082     0.352    -0.032
+football      ensemble:mean+temp in-sample(train+val)               fraction-1pct         1564       -0.064             -0.139              0.014     -613.642         0.619     0.352    -0.032
+football      ensemble:mean+temp in-sample(train+val) fraction-2pct+dd-stop-25pct           35       -0.402             -0.774              0.036     -246.144         0.251     0.229    -0.033
+football      ensemble:mean+temp in-sample(train+val)    fixed-1u+commission-2pct         1564       -0.063             -0.138              0.012      -99.003         0.100     0.352    -0.032
+football      ensemble:mean+temp in-sample(train+val)     fixed-1u+uncertainty-k1          745       -0.014             -0.124              0.094      -10.340         0.038     0.354    -0.031
+football      ensemble:mean+temp  out-of-sample(test)                    fixed-1u          462       -0.079             -0.213              0.064      -36.290         0.054     0.338    -0.036
+football      ensemble:mean+temp  out-of-sample(test)               fraction-1pct          462       -0.101             -0.231              0.039     -339.751         0.437     0.338    -0.036
+football      ensemble:mean+temp  out-of-sample(test) fraction-2pct+dd-stop-25pct           43       -0.287             -0.621              0.108     -222.774         0.265     0.279    -0.017
+football      ensemble:mean+temp  out-of-sample(test)    fixed-1u+commission-2pct          462       -0.090             -0.223              0.050      -41.684         0.057     0.338    -0.036
+football      ensemble:mean+temp  out-of-sample(test)     fixed-1u+uncertainty-k1          195       -0.033             -0.220              0.171       -6.500         0.033     0.379    -0.038
+football        dixon-coles+temp in-sample(train+val)                    fixed-1u         1558       -0.044             -0.117              0.032      -68.220         0.072     0.358    -0.032
+football        dixon-coles+temp in-sample(train+val)               fraction-1pct         1558       -0.052             -0.126              0.026     -571.562         0.579     0.358    -0.032
+football        dixon-coles+temp in-sample(train+val) fraction-2pct+dd-stop-25pct           57       -0.246             -0.564              0.099     -249.872         0.252     0.316    -0.009
+football        dixon-coles+temp in-sample(train+val)    fixed-1u+commission-2pct         1558       -0.056             -0.128              0.019      -86.876         0.089     0.358    -0.032
+football        dixon-coles+temp in-sample(train+val)     fixed-1u+uncertainty-k1          800       -0.031             -0.134              0.068      -24.750         0.056     0.378    -0.032
+football        dixon-coles+temp  out-of-sample(test)                    fixed-1u          475        0.039             -0.105              0.179       18.430         0.032     0.368    -0.036
+football        dixon-coles+temp  out-of-sample(test)               fraction-1pct          475        0.027             -0.119              0.169      129.857         0.280     0.368    -0.036
+football        dixon-coles+temp  out-of-sample(test) fraction-2pct+dd-stop-25pct           47       -0.192             -0.507              0.154     -174.686         0.275     0.340    -0.038
+football        dixon-coles+temp  out-of-sample(test)    fixed-1u+commission-2pct          475        0.025             -0.117              0.164       12.061         0.033     0.368    -0.036
+football        dixon-coles+temp  out-of-sample(test)     fixed-1u+uncertainty-k1          258       -0.052             -0.211              0.126      -13.290         0.043     0.364    -0.031
+football           logistic+temp in-sample(train+val)                    fixed-1u         1620       -0.077             -0.150             -0.004     -125.290         0.140     0.344    -0.026
+football           logistic+temp in-sample(train+val)               fraction-1pct         1620       -0.112             -0.190             -0.032     -759.559         0.787     0.344    -0.026
+football           logistic+temp in-sample(train+val) fraction-2pct+dd-stop-25pct           42       -0.339             -0.675              0.066     -253.029         0.263     0.262    -0.029
+football           logistic+temp in-sample(train+val)    fixed-1u+commission-2pct         1620       -0.089             -0.160             -0.017     -144.044         0.156     0.344    -0.026
+football           logistic+temp in-sample(train+val)     fixed-1u+uncertainty-k1          922       -0.050             -0.149              0.051      -45.730         0.074     0.342    -0.028
+football           logistic+temp  out-of-sample(test)                    fixed-1u          468       -0.088             -0.220              0.047      -41.410         0.051     0.325    -0.031
+football           logistic+temp  out-of-sample(test)               fraction-1pct          468       -0.109             -0.237              0.023     -385.676         0.431     0.325    -0.031
+football           logistic+temp  out-of-sample(test) fraction-2pct+dd-stop-25pct           51       -0.278             -0.612              0.107     -255.999         0.278     0.275    -0.020
+football           logistic+temp  out-of-sample(test)    fixed-1u+commission-2pct          468       -0.100             -0.230              0.033      -46.902         0.055     0.325    -0.031
+football           logistic+temp  out-of-sample(test)     fixed-1u+uncertainty-k1          202       -0.084             -0.264              0.106      -16.900         0.025     0.337    -0.035
+football                elo+temp in-sample(train+val)                    fixed-1u         1618       -0.032             -0.107              0.050      -52.510         0.083     0.337    -0.032
+football                elo+temp in-sample(train+val)               fraction-1pct         1618       -0.038             -0.114              0.046     -522.350         0.622     0.337    -0.032
+football                elo+temp in-sample(train+val) fraction-2pct+dd-stop-25pct           25       -0.555             -0.930             -0.091     -251.851         0.252     0.160    -0.021
+football                elo+temp in-sample(train+val)    fixed-1u+commission-2pct         1618       -0.045             -0.119              0.036      -72.920         0.095     0.337    -0.032
+football                elo+temp in-sample(train+val)     fixed-1u+uncertainty-k1          905       -0.056             -0.154              0.038      -50.860         0.065     0.326    -0.032
+football                elo+temp  out-of-sample(test)                    fixed-1u          494       -0.075             -0.194              0.051      -36.820         0.054     0.346    -0.038
+football                elo+temp  out-of-sample(test)               fraction-1pct          494       -0.101             -0.218              0.020     -346.322         0.430     0.346    -0.038
+football                elo+temp  out-of-sample(test) fraction-2pct+dd-stop-25pct           26       -0.542             -0.877             -0.148     -257.813         0.266     0.192    -0.027
+football                elo+temp  out-of-sample(test)    fixed-1u+commission-2pct          494       -0.086             -0.204              0.038      -42.544         0.055     0.346    -0.038
+football                elo+temp  out-of-sample(test)     fixed-1u+uncertainty-k1          239       -0.018             -0.189              0.166       -4.260         0.025     0.368    -0.037
+football market:pinnacle-opening in-sample(train+val)                    fixed-1u            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening in-sample(train+val)               fraction-1pct            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening in-sample(train+val) fraction-2pct+dd-stop-25pct            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening in-sample(train+val)    fixed-1u+commission-2pct            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening in-sample(train+val)     fixed-1u+uncertainty-k1            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening  out-of-sample(test)                    fixed-1u            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening  out-of-sample(test)               fraction-1pct            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening  out-of-sample(test) fraction-2pct+dd-stop-25pct            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening  out-of-sample(test)    fixed-1u+commission-2pct            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+football market:pinnacle-opening  out-of-sample(test)     fixed-1u+uncertainty-k1            0          NaN                NaN                NaN        0.000           NaN       NaN       NaN
+  tennis      ensemble:mean+temp in-sample(train+val)                    fixed-1u         6818       -0.057             -0.091             -0.021     -390.010         0.395     0.348       NaN
+  tennis      ensemble:mean+temp in-sample(train+val)               fraction-1pct         6818       -0.057             -0.103             -0.007     -989.888         0.990     0.348       NaN
+  tennis      ensemble:mean+temp in-sample(train+val) fraction-2pct+dd-stop-25pct          126       -0.129             -0.349              0.098     -308.627         0.348     0.349       NaN
+  tennis      ensemble:mean+temp in-sample(train+val)    fixed-1u+commission-2pct         6818       -0.069             -0.102             -0.033     -471.150         0.475     0.348       NaN
+  tennis      ensemble:mean+temp in-sample(train+val)     fixed-1u+uncertainty-k1         4691       -0.053             -0.098             -0.011     -250.680         0.275     0.326       NaN
+  tennis      ensemble:mean+temp  out-of-sample(test)                    fixed-1u         1300       -0.148             -0.218             -0.077     -191.880         0.201     0.335       NaN
+  tennis      ensemble:mean+temp  out-of-sample(test)               fraction-1pct         1300       -0.134             -0.216             -0.050     -875.463         0.888     0.335       NaN
+  tennis      ensemble:mean+temp  out-of-sample(test) fraction-2pct+dd-stop-25pct          137       -0.136             -0.357              0.096     -371.009         0.446     0.321       NaN
+  tennis      ensemble:mean+temp  out-of-sample(test)    fixed-1u+commission-2pct         1300       -0.158             -0.227             -0.089     -205.342         0.213     0.335       NaN
+  tennis      ensemble:mean+temp  out-of-sample(test)     fixed-1u+uncertainty-k1          865       -0.161             -0.254             -0.068     -139.120         0.154     0.311       NaN
+  tennis           logistic+temp in-sample(train+val)                    fixed-1u         6802       -0.055             -0.092             -0.021     -374.660         0.386     0.348       NaN
+  tennis           logistic+temp in-sample(train+val)               fraction-1pct         6802       -0.046             -0.089              0.000     -988.978         0.990     0.348       NaN
+  tennis           logistic+temp in-sample(train+val) fraction-2pct+dd-stop-25pct          139       -0.104             -0.336              0.116     -302.351         0.411     0.360       NaN
+  tennis           logistic+temp in-sample(train+val)    fixed-1u+commission-2pct         6802       -0.067             -0.103             -0.034     -455.867         0.465     0.348       NaN
+  tennis           logistic+temp in-sample(train+val)     fixed-1u+uncertainty-k1         4846       -0.064             -0.105             -0.019     -310.750         0.317     0.318       NaN
+  tennis           logistic+temp  out-of-sample(test)                    fixed-1u         1321       -0.115             -0.187             -0.045     -151.710         0.171     0.347       NaN
+  tennis           logistic+temp  out-of-sample(test)               fraction-1pct         1321       -0.109             -0.186             -0.029     -816.045         0.849     0.347       NaN
+  tennis           logistic+temp  out-of-sample(test) fraction-2pct+dd-stop-25pct           46       -0.194             -0.548              0.243     -168.750         0.258     0.304       NaN
+  tennis           logistic+temp  out-of-sample(test)    fixed-1u+commission-2pct         1321       -0.126             -0.197             -0.057     -165.916         0.182     0.347       NaN
+  tennis           logistic+temp  out-of-sample(test)     fixed-1u+uncertainty-k1          898       -0.146             -0.239             -0.051     -131.090         0.141     0.312       NaN
+  tennis                elo+temp in-sample(train+val)                    fixed-1u         6875       -0.053             -0.088             -0.018     -362.870         0.372     0.351       NaN
+  tennis                elo+temp in-sample(train+val)               fraction-1pct         6875       -0.056             -0.104             -0.007     -986.399         0.988     0.351       NaN
+  tennis                elo+temp in-sample(train+val) fraction-2pct+dd-stop-25pct           56       -0.095             -0.393              0.235      -95.479         0.273     0.411       NaN
+  tennis                elo+temp in-sample(train+val)    fixed-1u+commission-2pct         6875       -0.065             -0.099             -0.030     -444.833         0.453     0.351       NaN
+  tennis                elo+temp in-sample(train+val)     fixed-1u+uncertainty-k1         4891       -0.055             -0.098             -0.011     -268.050         0.294     0.324       NaN
+  tennis                elo+temp  out-of-sample(test)                    fixed-1u         1341       -0.143             -0.213             -0.074     -192.040         0.207     0.338       NaN
+  tennis                elo+temp  out-of-sample(test)               fraction-1pct         1341       -0.132             -0.216             -0.051     -878.152         0.896     0.338       NaN
+  tennis                elo+temp  out-of-sample(test) fraction-2pct+dd-stop-25pct          125       -0.112             -0.360              0.138     -279.357         0.362     0.328       NaN
+  tennis                elo+temp  out-of-sample(test)    fixed-1u+commission-2pct         1341       -0.154             -0.223             -0.086     -205.959         0.219     0.338       NaN
+  tennis                elo+temp  out-of-sample(test)     fixed-1u+uncertainty-k1          929       -0.162             -0.250             -0.071     -150.750         0.164     0.313       NaN
+
+backtestbuddy cross-check:
+    sport              model    n  ours_pnl  backtestbuddy_pnl     abs_diff  backtestbuddy_bets
+football ensemble:mean+temp  462    -36.29             -36.29 7.105427e-15                 462
+football   dixon-coles+temp  475     18.43              18.43 0.000000e+00                 475
+football      logistic+temp  468    -41.41             -41.41 0.000000e+00                 468
+football           elo+temp  494    -36.82             -36.82 7.105427e-15                 494
+  tennis ensemble:mean+temp 1300   -191.88            -191.88 0.000000e+00                1300
+  tennis      logistic+temp 1321   -151.71            -151.71 0.000000e+00                1321
+  tennis           elo+temp 1341   -192.04            -192.04 0.000000e+00                1341
+
+virtual journal run_id: bt-20261031T225539-2ae3cd

@@ -83,7 +83,7 @@ dashboard/app.py · scripts/ · tests/ · .claude/skills/ (37 installed skills)
 
 | sport (test n) | uniform | best lab model | strongest benchmark |
 |---|---|---|---|
-| Football EPL 2024-26 (760) | 1.0986 | ensemble 1.0086 · Gamma-Poisson 1.0087 | Pinnacle closing 0.9739 · opening 0.9931 |
+| Football EPL 2024-26 (760) | 1.0986 | ensemble 1.0047 · Gamma-Poisson 1.0069 · Dixon-Coles 1.0130 | Pinnacle closing 0.9739 · opening 0.9931 |
 | Hockey NHL 2018-20 (2,353) | 0.6931 | logistic 0.6788 | — (no odds available) |
 | Basketball NBA 2020-22 (2,494) | 0.6931 | ensemble+temp 0.6454 · Elo 0.6462 | FiveThirtyEight 0.6291 |
 | Tennis ATP 2024 (1,813) | 0.6931 | logistic 0.6098 | Pinnacle (single snapshot) 0.5751 |
@@ -91,9 +91,9 @@ dashboard/app.py · scripts/ · tests/ · .claude/skills/ (37 installed skills)
 The models beat naive baselines in every sport, with paired-bootstrap CIs excluding zero. They do **not**
 beat sharp market prices or FiveThirtyEight. In the virtual strategy research, no strategy shows a
 positive out-of-sample ROI whose CI excludes zero. Football CLV is negative (about −3% to −4%). Tennis
-flat-stake ROI is about −11% to −15% (CI below 0). On selected positions the realised hit rate (0.347) is
-far below the model's expected rate (0.446), which is adverse selection. The Live model, tested on real
-EPL half-time scores, improves log loss from 1.046 to 0.866 on the test seasons. Full details are in
+flat-stake ROI is about −11% to −15% (CI below 0). On selected positions the realised hit rate (0.345) is
+far below the model's expected rate (0.442), which is adverse selection. The Live model, tested on real
+EPL half-time scores, improves log loss from 1.013 to 0.858 on the test seasons. Full details are in
 `MODEL_VALIDATION.md`.
 
 ## Documents

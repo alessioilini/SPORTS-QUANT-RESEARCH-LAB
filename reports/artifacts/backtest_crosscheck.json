@@ -1,41 +1,41 @@
 {
-  "run_id": "bt-20261031T220443-2caa79",
+  "run_id": "bt-20261031T225539-2ae3cd",
   "crosscheck": [
     {
       "sport": "football",
       "model": "ensemble:mean+temp",
-      "n": 471,
-      "ours_pnl": -40.89999999999999,
-      "backtestbuddy_pnl": -40.9,
+      "n": 462,
+      "ours_pnl": -36.290000000000006,
+      "backtestbuddy_pnl": -36.29,
       "abs_diff": 7.105427357601002e-15,
-      "backtestbuddy_bets": 471
+      "backtestbuddy_bets": 462
     },
     {
       "sport": "football",
       "model": "dixon-coles+temp",
-      "n": 490,
-      "ours_pnl": 4.069999999999997,
-      "backtestbuddy_pnl": 4.0699999999999985,
-      "abs_diff": 1.7763568394002505e-15,
-      "backtestbuddy_bets": 490
+      "n": 475,
+      "ours_pnl": 18.429999999999993,
+      "backtestbuddy_pnl": 18.429999999999993,
+      "abs_diff": 0.0,
+      "backtestbuddy_bets": 475
     },
     {
       "sport": "football",
       "model": "logistic+temp",
-      "n": 471,
-      "ours_pnl": -21.619999999999997,
-      "backtestbuddy_pnl": -21.619999999999994,
-      "abs_diff": 3.552713678800501e-15,
-      "backtestbuddy_bets": 471
+      "n": 468,
+      "ours_pnl": -41.41,
+      "backtestbuddy_pnl": -41.41,
+      "abs_diff": 0.0,
+      "backtestbuddy_bets": 468
     },
     {
       "sport": "football",
       "model": "elo+temp",
-      "n": 504,
-      "ours_pnl": -17.019999999999992,
-      "backtestbuddy_pnl": -17.019999999999996,
-      "abs_diff": 3.552713678800501e-15,
-      "backtestbuddy_bets": 504
+      "n": 494,
+      "ours_pnl": -36.82,
+      "backtestbuddy_pnl": -36.81999999999999,
+      "abs_diff": 7.105427357601002e-15,
+      "backtestbuddy_bets": 494
     },
     {
       "sport": "tennis",

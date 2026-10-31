@@ -3,51 +3,51 @@
    tuned dc: {'xi': 0.001, 'ridge': 0.01} (val LL 0.9214)
    baseline:uniform                0.7s refits=0
    baseline:base-rate              0.6s refits=0
-   elo                             2.0s refits=0
-   dixon-coles                     5.0s refits=234
-   poisson                         4.8s refits=234
-   bayes:gamma-poisson             2.8s refits=0
-   logistic                        7.6s refits=68
-   gradient-boosting              32.6s refits=68
-   market:pinnacle-opening         1.0s refits=0
-[football] done in 87s
+   elo                             2.2s refits=0
+   dixon-coles                     4.7s refits=234
+   poisson                         4.7s refits=234
+   bayes:gamma-poisson             2.7s refits=0
+   logistic                        8.6s refits=68
+   gradient-boosting              33.5s refits=68
+   market:pinnacle-opening         1.2s refits=0
+[football] done in 89s
 [hockey] 11724 matches; splits: train=6870, test=2353, validation=1271, burn_in=1230
    tuned elo: {'k': 8.0, 'home_adv': 50.0} (val LL 0.6720)
    tuned dc: {'xi': 0.004, 'ridge': 3.0} (val LL 0.6718)
    tuned gr: {'home_adv': 0.25, 'tau': 0.005} (val LL 0.6748)
    baseline:uniform                2.8s refits=0
-   baseline:base-rate              3.0s refits=0
-   elo                             6.0s refits=0
-   dixon-coles                     9.9s refits=221
-   poisson                        10.1s refits=221
-   bayes:gamma-poisson             8.8s refits=0
+   baseline:base-rate              2.9s refits=0
+   elo                             5.8s refits=0
+   dixon-coles                    10.1s refits=221
+   poisson                         9.8s refits=221
+   bayes:gamma-poisson             8.7s refits=0
    bayes:gaussian-rating           9.9s refits=0
-   logistic                       20.6s refits=59
-   gradient-boosting              50.5s refits=59
-[hockey] done in 253s
+   logistic                       20.5s refits=59
+   gradient-boosting              31.1s refits=59
+[hockey] done in 235s
 [basketball] 8886 matches; splits: train=3933, test=2494, burn_in=1316, validation=1143
    tuned elo: {'k': 14.0, 'home_adv': 50.0} (val LL 0.6356)
    tuned gr: {'home_adv': 0.25, 'tau': 0.02} (val LL 0.6314)
-   baseline:uniform                2.5s refits=0
-   baseline:base-rate              2.6s refits=0
-   elo                             5.3s refits=0
+   baseline:uniform                2.4s refits=0
+   baseline:base-rate              2.4s refits=0
+   elo                             5.5s refits=0
    bayes:gaussian-rating           8.3s refits=0
-   logistic                       21.6s refits=53
-   gradient-boosting             530.7s refits=53
-   external:fivethirtyeight        3.2s refits=0
-[basketball] done in 652s
+   logistic                       17.0s refits=53
+   gradient-boosting              26.2s refits=53
+   external:fivethirtyeight        3.1s refits=0
+[basketball] done in 144s
 [tennis] 13514 matches; splits: train=6388, validation=2703, burn_in=2610, test=1813
    tuned te: {'k_scale': 200.0, 'surface_weight': 0.6} (val LL 0.6338)
    tuned gr: {'home_adv': 0.0, 'tau': 0.005} (val LL 0.6403)
-   baseline:uniform                2.6s refits=0
+   baseline:uniform                2.5s refits=0
    baseline:base-rate              2.8s refits=0
-   elo                             6.8s refits=0
-   bayes:gaussian-rating          10.8s refits=0
-   logistic                       21.9s refits=50
-   gradient-boosting              33.6s refits=50
-   baseline:rank-logit            24.3s refits=50
+   elo                             7.0s refits=0
+   bayes:gaussian-rating          11.4s refits=0
+   logistic                       22.7s refits=50
+   gradient-boosting              32.9s refits=50
+   baseline:rank-logit            22.6s refits=50
 [tennis] done in 197s
-[live-HT] s2=0.539 prior_weight=18.3 test: live LL 0.865733829424456 vs prematch 1.0463879931151203
+[live-HT] s2=0.539 prior_weight=18.3 test: live LL 0.8583137386121238 vs prematch 1.012997621482293
 [MC] max |MC - analytic| = 0.0058; reproducible=True
 [MC season] as_of 2026-01-01: 186 played, 194 simulated x10000; actual points inside 90% interval for 17/20 teams
 [live-NBA] sigma_full estimated 11.58 pts from 14208 games (2005-2015)
@@ -70,20 +70,20 @@ basketball         baseline:base-rate 2494    0.6904       0.6846       0.6964 0
 basketball           baseline:uniform 2494    0.6931       0.6931       0.6931 0.5000    0.5473 0.0473
   football    market:pinnacle-closing  590    0.9739       0.9381       1.0097 0.5808    0.5390 0.0299
   football    market:pinnacle-opening  760    0.9931       0.9588       1.0261 0.5945    0.5171 0.0324
-  football              ensemble:mean  760    1.0086       0.9761       1.0412 0.6045    0.5026 0.0375
-  football        bayes:gamma-poisson  760    1.0087       0.9795       1.0379 0.6038    0.5026 0.0317
-  football                   logistic  760    1.0100       0.9753       1.0458 0.6059    0.5053 0.0328
-  football              logistic+temp  760    1.0103       0.9754       1.0464 0.6061    0.5053 0.0326
-  football   bayes:gamma-poisson+temp  760    1.0105       0.9769       1.0442 0.6052    0.5026 0.0446
-  football         ensemble:mean+temp  760    1.0123       0.9763       1.0484 0.6072    0.5026 0.0423
-  football                        elo  760    1.0211       0.9836       1.0582 0.6129    0.4934 0.0582
-  football                   elo+temp  760    1.0223       0.9843       1.0601 0.6137    0.4934 0.0614
-  football     gradient-boosting+temp  760    1.0350       1.0022       1.0679 0.6212    0.4842 0.0507
-  football                dixon-coles  760    1.0464       1.0040       1.0893 0.6189    0.4882 0.0358
-  football                    poisson  760    1.0470       1.0042       1.0898 0.6193    0.4882 0.0360
-  football          gradient-boosting  760    1.0484       1.0087       1.0883 0.6287    0.4842 0.0576
-  football           dixon-coles+temp  760    1.0552       1.0081       1.1026 0.6227    0.4882 0.0442
-  football               poisson+temp  760    1.0572       1.0094       1.1052 0.6237    0.4882 0.0459
+  football              ensemble:mean  760    1.0047       0.9719       1.0376 0.6018    0.5013 0.0328
+  football        bayes:gamma-poisson  760    1.0069       0.9779       1.0362 0.6025    0.4987 0.0353
+  football         ensemble:mean+temp  760    1.0080       0.9719       1.0445 0.6043    0.5013 0.0382
+  football   bayes:gamma-poisson+temp  760    1.0082       0.9748       1.0423 0.6037    0.4987 0.0442
+  football                   logistic  760    1.0089       0.9735       1.0455 0.6052    0.4987 0.0326
+  football              logistic+temp  760    1.0093       0.9736       1.0462 0.6054    0.4987 0.0330
+  football                dixon-coles  760    1.0130       0.9793       1.0487 0.6048    0.4921 0.0347
+  football                    poisson  760    1.0137       0.9794       1.0497 0.6053    0.4921 0.0366
+  football                        elo  760    1.0150       0.9774       1.0523 0.6086    0.5066 0.0531
+  football                   elo+temp  760    1.0161       0.9779       1.0540 0.6093    0.5066 0.0550
+  football           dixon-coles+temp  760    1.0168       0.9796       1.0562 0.6072    0.4921 0.0415
+  football               poisson+temp  760    1.0184       0.9803       1.0584 0.6082    0.4921 0.0482
+  football     gradient-boosting+temp  760    1.0318       0.9985       1.0643 0.6186    0.4776 0.0469
+  football          gradient-boosting  760    1.0454       1.0053       1.0851 0.6262    0.4776 0.0605
   football         baseline:base-rate  760    1.0834       1.0638       1.1024 0.6562    0.4171 0.0229
   football    baseline:base-rate+temp  760    1.0854       1.0642       1.1058 0.6573    0.4171 0.0281
   football           baseline:uniform  760    1.0986       1.0986       1.0986 0.6667    0.4171 0.0558
@@ -123,4 +123,4 @@ basketball           baseline:uniform 2494    0.6931       0.6931       0.6931 0
     tennis    baseline:base-rate+temp 1813    0.6931       0.6929       0.6933 0.4999    0.5108 0.0089
     tennis           baseline:uniform 1813    0.6931       0.6931       0.6931 0.5000    0.5108 0.0108
 
-Total runtime 1201s
+Total runtime 674s

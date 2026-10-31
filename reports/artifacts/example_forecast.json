@@ -16,55 +16,55 @@
   },
   "models": {
     "dixon_coles": {
-      "lambda_home": 1.7963594252561863,
-      "mu_away": 1.094319433030372,
-      "rho": -0.024551596550573644,
-      "home_adv_log": 0.17216918416775703,
+      "lambda_home": 1.7967573707627538,
+      "mu_away": 1.0925864658940627,
+      "rho": -0.028997267333554726,
+      "home_adv_log": 0.17254354403997837,
       "hyperparameters(tuned on 2023-24 only)": {
         "xi": 0.001,
         "ridge": 0.01
       },
       "probs": {
-        "H": 0.5354124705707154,
-        "D": 0.23701095581535558,
-        "A": 0.22757657361392908
+        "H": 0.5354280563721256,
+        "D": 0.23793917039724882,
+        "A": 0.22663277323062542
       }
     },
     "monte_carlo(dixon-coles, n=20000, seed=20261031)": {
-      "H": 0.5387,
-      "D": 0.2356,
-      "A": 0.2257,
-      "over_2.5": 0.55065,
-      "mc_se": 0.0035249277297556047
+      "H": 0.5389,
+      "D": 0.2364,
+      "A": 0.2247,
+      "over_2.5": 0.5501,
+      "mc_se": 0.003524817654858191
     },
     "bayes_gamma_poisson": {
       "probs": {
-        "H": 0.5805071156045734,
-        "D": 0.22319384074824936,
-        "A": 0.1962990436471772
+        "H": 0.5779130401236534,
+        "D": 0.22450491199212613,
+        "A": 0.19758204788422062
       },
-      "posterior_sd_of_P(H)": 0.1081901058652908
+      "posterior_sd_of_P(H)": 0.10804344710305369
     },
     "walk_forward_artifacts": {
       "elo": {
-        "H": 0.6208488131206671,
-        "D": 0.19656922364178642,
-        "A": 0.1825819632375465
+        "H": 0.6160638072090088,
+        "D": 0.1977392192432462,
+        "A": 0.18619697354774495
       },
       "logistic": {
-        "H": 0.5984926000472175,
-        "D": 0.22825824080931292,
-        "A": 0.1732491591434696
+        "H": 0.5979011184631289,
+        "D": 0.22793267105697718,
+        "A": 0.17416621047989383
       },
       "gradient-boosting": {
-        "H": 0.6765847649440286,
-        "D": 0.22786421209828153,
-        "A": 0.09555102295768975
+        "H": 0.6935781513054218,
+        "D": 0.21104908962772434,
+        "A": 0.09537275906685397
       },
       "ensemble:mean+temp": {
-        "H": 0.6108128881376251,
-        "D": 0.20832129159989285,
-        "A": 0.1808658202624821
+        "H": 0.6085656519963586,
+        "D": 0.20921388067494037,
+        "A": 0.18222046732870104
       }
     }
   },
@@ -85,7 +85,7 @@
       "A": 5.75
     }
   },
-  "ev_explanation(education)": "1) Implied probability q = 1/odds:\n   H: 1/1.600 = 0.6250\n   D: 1/4.350 = 0.2299\n   A: 1/5.490 = 0.1821\n2) Overround \u03a3q = 1.0370 -> bookmaker margin 3.70%\n3) Fair (de-vigged) probabilities:\n   H: multiplicative 0.6027 | Shin 0.6101\n   D: multiplicative 0.2217 | Shin 0.2186\n   A: multiplicative 0.1756 | Shin 0.1713\n4) Expected value per 1 virtual unit, EV = p*odds - 1 (p from a MODEL, uncertain):\n   H: 0.6108*1.600-1 = -0.0227\n   D: 0.2083*4.350-1 = -0.0938\n   A: 0.1809*5.490-1 = -0.0070\n   A positive EV only means the model disagrees with the market; it is not evidence of an edge unless the model is shown to be better calibrated out-of-sample.",
+  "ev_explanation(education)": "1) Implied probability q = 1/odds:\n   H: 1/1.600 = 0.6250\n   D: 1/4.350 = 0.2299\n   A: 1/5.490 = 0.1821\n2) Overround \u03a3q = 1.0370 -> bookmaker margin 3.70%\n3) Fair (de-vigged) probabilities:\n   H: multiplicative 0.6027 | Shin 0.6101\n   D: multiplicative 0.2217 | Shin 0.2186\n   A: multiplicative 0.1756 | Shin 0.1713\n4) Expected value per 1 virtual unit, EV = p*odds - 1 (p from a MODEL, uncertain):\n   H: 0.6086*1.600-1 = -0.0263\n   D: 0.2092*4.350-1 = -0.0899\n   A: 0.1822*5.490-1 = +0.0004\n   A positive EV only means the model disagrees with the market; it is not evidence of an edge unless the model is shown to be better calibrated out-of-sample.",
   "data_sources": [
     {
       "source_id": "football_epl_1819",
@@ -213,9 +213,9 @@
     "outcome": "D"
   },
   "forecast_log": {
-    "forecast_id": "c59c2641-f6ba-4efc-ae31-02e6c7122ce8",
+    "forecast_id": "e3cc618e-6621-43ff-9700-57b007e16f48",
     "outcome": "D",
-    "brier": 1.0325600065883092,
-    "log_loss": 1.5686737199048624
+    "brier": 1.0288991380204306,
+    "log_loss": 1.5643981977738697
   }
 }

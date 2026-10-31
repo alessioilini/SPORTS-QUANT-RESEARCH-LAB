@@ -26,20 +26,20 @@ Test matches: **760** (2024-25, 2025-26).
 |---|---|---|---|---|---|
 | `market:pinnacle-closing` *(benchmark)* | 0.9739 [0.9381, 1.0097] | 0.5808 | 0.539 | 0.030 | 0.1972 |
 | `market:pinnacle-opening` *(benchmark)* | 0.9931 [0.9588, 1.0261] | 0.5945 | 0.517 | 0.032 | 0.2013 |
-| `ensemble:mean` | 1.0086 [0.9761, 1.0412] | 0.6045 | 0.503 | 0.037 | 0.2059 |
-| `bayes:gamma-poisson` | 1.0087 [0.9795, 1.0379] | 0.6038 | 0.503 | 0.032 | 0.2059 |
-| `logistic` | 1.0100 [0.9753, 1.0458] | 0.6059 | 0.505 | 0.033 | 0.2063 |
-| `logistic+temp` | 1.0103 [0.9754, 1.0464] | 0.6061 | 0.505 | 0.033 | 0.2064 |
-| `bayes:gamma-poisson+temp` | 1.0105 [0.9769, 1.0442] | 0.6052 | 0.503 | 0.045 | 0.2060 |
-| `ensemble:mean+temp` | 1.0123 [0.9763, 1.0484] | 0.6072 | 0.503 | 0.042 | 0.2067 |
-| `elo` | 1.0211 [0.9836, 1.0582] | 0.6129 | 0.493 | 0.058 | 0.2088 |
-| `elo+temp` | 1.0223 [0.9843, 1.0601] | 0.6137 | 0.493 | 0.061 | 0.2091 |
-| `gradient-boosting+temp` | 1.0350 [1.0022, 1.0679] | 0.6212 | 0.484 | 0.051 | 0.2129 |
-| `dixon-coles` | 1.0464 [1.0040, 1.0893] | 0.6189 | 0.488 | 0.036 | 0.2127 |
-| `poisson` | 1.0470 [1.0042, 1.0898] | 0.6193 | 0.488 | 0.036 | 0.2128 |
-| `gradient-boosting` | 1.0484 [1.0087, 1.0883] | 0.6287 | 0.484 | 0.058 | 0.2155 |
-| `dixon-coles+temp` | 1.0552 [1.0081, 1.1026] | 0.6227 | 0.488 | 0.044 | 0.2141 |
-| `poisson+temp` | 1.0572 [1.0094, 1.1052] | 0.6237 | 0.488 | 0.046 | 0.2144 |
+| `ensemble:mean` | 1.0047 [0.9719, 1.0376] | 0.6018 | 0.501 | 0.033 | 0.2048 |
+| `bayes:gamma-poisson` | 1.0069 [0.9779, 1.0362] | 0.6025 | 0.499 | 0.035 | 0.2054 |
+| `ensemble:mean+temp` | 1.0080 [0.9719, 1.0445] | 0.6043 | 0.501 | 0.038 | 0.2055 |
+| `bayes:gamma-poisson+temp` | 1.0082 [0.9748, 1.0423] | 0.6037 | 0.499 | 0.044 | 0.2055 |
+| `logistic` | 1.0089 [0.9735, 1.0455] | 0.6052 | 0.499 | 0.033 | 0.2060 |
+| `logistic+temp` | 1.0093 [0.9736, 1.0462] | 0.6054 | 0.499 | 0.033 | 0.2061 |
+| `dixon-coles` | 1.0130 [0.9793, 1.0487] | 0.6048 | 0.492 | 0.035 | 0.2070 |
+| `poisson` | 1.0137 [0.9794, 1.0497] | 0.6053 | 0.492 | 0.037 | 0.2071 |
+| `elo` | 1.0150 [0.9774, 1.0523] | 0.6086 | 0.507 | 0.053 | 0.2068 |
+| `elo+temp` | 1.0161 [0.9779, 1.0540] | 0.6093 | 0.507 | 0.055 | 0.2070 |
+| `dixon-coles+temp` | 1.0168 [0.9796, 1.0562] | 0.6072 | 0.492 | 0.042 | 0.2078 |
+| `poisson+temp` | 1.0184 [0.9803, 1.0584] | 0.6082 | 0.492 | 0.048 | 0.2080 |
+| `gradient-boosting+temp` | 1.0318 [0.9985, 1.0643] | 0.6186 | 0.478 | 0.047 | 0.2116 |
+| `gradient-boosting` | 1.0454 [1.0053, 1.0851] | 0.6262 | 0.478 | 0.060 | 0.2142 |
 | `baseline:base-rate` | 1.0834 [1.0638, 1.1024] | 0.6562 | 0.417 | 0.023 | 0.2315 |
 | `baseline:base-rate+temp` | 1.0854 [1.0642, 1.1058] | 0.6573 | 0.417 | 0.028 | 0.2317 |
 | `baseline:uniform` | 1.0986 [1.0986, 1.0986] | 0.6667 | 0.417 | 0.056 | 0.2346 |
@@ -49,15 +49,15 @@ Test matches: **760** (2024-25, 2025-26).
 | model | train | validation | test | test − train |
 |---|---|---|---|---|
 | `baseline:base-rate` | 1.0686 | 1.0541 | 1.0834 | 0.0148 |
-| `bayes:gamma-poisson` | 0.9867 | 0.9420 | 1.0087 | 0.0220 |
-| `dixon-coles` | 0.9941 | 0.9214 | 1.0464 | 0.0522 |
-| `elo` | 0.9900 | 0.9354 | 1.0211 | 0.0311 |
-| `ensemble:mean` | 0.9859 | 0.9269 | 1.0086 | 0.0227 |
-| `gradient-boosting` | 1.0905 | 0.9523 | 1.0484 | -0.0422 |
-| `logistic` | 1.0069 | 0.9292 | 1.0100 | 0.0031 |
+| `bayes:gamma-poisson` | 0.9867 | 0.9420 | 1.0069 | 0.0201 |
+| `dixon-coles` | 0.9941 | 0.9214 | 1.0130 | 0.0189 |
+| `elo` | 0.9900 | 0.9354 | 1.0150 | 0.0250 |
+| `ensemble:mean` | 0.9859 | 0.9269 | 1.0047 | 0.0188 |
+| `gradient-boosting` | 1.0905 | 0.9523 | 1.0454 | -0.0452 |
+| `logistic` | 1.0069 | 0.9292 | 1.0089 | 0.0020 |
 | `market:pinnacle-closing` | 0.9670 | 0.8995 | 0.9739 | 0.0069 |
 | `market:pinnacle-opening` | 0.9702 | 0.9085 | 0.9931 | 0.0229 |
-| `poisson` | 0.9933 | 0.9214 | 1.0470 | 0.0537 |
+| `poisson` | 0.9933 | 0.9214 | 1.0137 | 0.0204 |
 
 **Paired comparison on test** (Δ log loss = model − reference; negative = model better; `p_better` = bootstrap share with Δ<0):
 
@@ -65,32 +65,32 @@ Test matches: **760** (2024-25, 2025-26).
 |---|---|---|---|---|---|---|
 | `market:pinnacle-closing` | `baseline:base-rate` | 590 | -0.1047 | [-0.1345, -0.0753] | 1.00 | better (CI < 0) |
 | `market:pinnacle-opening` | `baseline:base-rate` | 760 | -0.0904 | [-0.1161, -0.0642] | 1.00 | better (CI < 0) |
-| `ensemble:mean` | `baseline:base-rate` | 760 | -0.0749 | [-0.0990, -0.0501] | 1.00 | better (CI < 0) |
-| `bayes:gamma-poisson` | `baseline:base-rate` | 760 | -0.0747 | [-0.0960, -0.0532] | 1.00 | better (CI < 0) |
-| `logistic` | `baseline:base-rate` | 760 | -0.0734 | [-0.1001, -0.0452] | 1.00 | better (CI < 0) |
-| `elo` | `baseline:base-rate` | 760 | -0.0623 | [-0.0901, -0.0340] | 1.00 | better (CI < 0) |
-| `dixon-coles` | `baseline:base-rate` | 760 | -0.0370 | [-0.0741, +0.0030] | 0.97 | not distinguishable |
-| `poisson` | `baseline:base-rate` | 760 | -0.0365 | [-0.0736, +0.0039] | 0.96 | not distinguishable |
-| `gradient-boosting` | `baseline:base-rate` | 760 | -0.0351 | [-0.0686, -0.0011] | 0.98 | better (CI < 0) |
+| `ensemble:mean` | `baseline:base-rate` | 760 | -0.0787 | [-0.1022, -0.0537] | 1.00 | better (CI < 0) |
+| `bayes:gamma-poisson` | `baseline:base-rate` | 760 | -0.0766 | [-0.0971, -0.0551] | 1.00 | better (CI < 0) |
+| `logistic` | `baseline:base-rate` | 760 | -0.0745 | [-0.1014, -0.0454] | 1.00 | better (CI < 0) |
+| `dixon-coles` | `baseline:base-rate` | 760 | -0.0704 | [-0.0983, -0.0411] | 1.00 | better (CI < 0) |
+| `poisson` | `baseline:base-rate` | 760 | -0.0697 | [-0.0973, -0.0406] | 1.00 | better (CI < 0) |
+| `elo` | `baseline:base-rate` | 760 | -0.0684 | [-0.0948, -0.0402] | 1.00 | better (CI < 0) |
+| `gradient-boosting` | `baseline:base-rate` | 760 | -0.0381 | [-0.0713, -0.0047] | 0.99 | better (CI < 0) |
 | `baseline:uniform` | `baseline:base-rate` | 760 | +0.0152 | [-0.0037, +0.0348] | 0.06 | not distinguishable |
 | `market:pinnacle-opening` | `market:pinnacle-closing` | 590 | +0.0030 | [-0.0023, +0.0082] | 0.13 | not distinguishable |
-| `ensemble:mean` | `market:pinnacle-closing` | 590 | +0.0183 | [+0.0033, +0.0319] | 0.01 | worse (CI > 0) |
-| `bayes:gamma-poisson` | `market:pinnacle-closing` | 590 | +0.0196 | [+0.0042, +0.0352] | 0.01 | worse (CI > 0) |
-| `logistic` | `market:pinnacle-closing` | 590 | +0.0204 | [+0.0046, +0.0361] | 0.01 | worse (CI > 0) |
-| `elo` | `market:pinnacle-closing` | 590 | +0.0270 | [+0.0071, +0.0454] | 0.01 | worse (CI > 0) |
-| `gradient-boosting` | `market:pinnacle-closing` | 590 | +0.0609 | [+0.0338, +0.0901] | 0.00 | worse (CI > 0) |
-| `poisson` | `market:pinnacle-closing` | 590 | +0.0669 | [+0.0306, +0.1072] | 0.00 | worse (CI > 0) |
-| `dixon-coles` | `market:pinnacle-closing` | 590 | +0.0669 | [+0.0307, +0.1076] | 0.00 | worse (CI > 0) |
+| `ensemble:mean` | `market:pinnacle-closing` | 590 | +0.0129 | [+0.0001, +0.0252] | 0.02 | worse (CI > 0) |
+| `bayes:gamma-poisson` | `market:pinnacle-closing` | 590 | +0.0164 | [+0.0017, +0.0315] | 0.01 | worse (CI > 0) |
+| `logistic` | `market:pinnacle-closing` | 590 | +0.0187 | [+0.0038, +0.0334] | 0.01 | worse (CI > 0) |
+| `dixon-coles` | `market:pinnacle-closing` | 590 | +0.0214 | [+0.0006, +0.0445] | 0.02 | worse (CI > 0) |
+| `poisson` | `market:pinnacle-closing` | 590 | +0.0214 | [+0.0004, +0.0447] | 0.02 | worse (CI > 0) |
+| `elo` | `market:pinnacle-closing` | 590 | +0.0217 | [+0.0062, +0.0369] | 0.00 | worse (CI > 0) |
+| `gradient-boosting` | `market:pinnacle-closing` | 590 | +0.0558 | [+0.0287, +0.0824] | 0.00 | worse (CI > 0) |
 | `baseline:base-rate` | `market:pinnacle-closing` | 590 | +0.1047 | [+0.0753, +0.1345] | 0.00 | worse (CI > 0) |
 | `baseline:uniform` | `market:pinnacle-closing` | 590 | +0.1247 | [+0.0890, +0.1605] | 0.00 | worse (CI > 0) |
 | `market:pinnacle-closing` | `market:pinnacle-opening` | 590 | -0.0030 | [-0.0082, +0.0023] | 0.87 | not distinguishable |
-| `ensemble:mean` | `market:pinnacle-opening` | 760 | +0.0155 | [+0.0037, +0.0268] | 0.00 | worse (CI > 0) |
-| `bayes:gamma-poisson` | `market:pinnacle-opening` | 760 | +0.0156 | [+0.0036, +0.0281] | 0.01 | worse (CI > 0) |
-| `logistic` | `market:pinnacle-opening` | 760 | +0.0169 | [+0.0027, +0.0303] | 0.01 | worse (CI > 0) |
-| `elo` | `market:pinnacle-opening` | 760 | +0.0280 | [+0.0121, +0.0439] | 0.00 | worse (CI > 0) |
-| `dixon-coles` | `market:pinnacle-opening` | 760 | +0.0533 | [+0.0251, +0.0855] | 0.00 | worse (CI > 0) |
-| `poisson` | `market:pinnacle-opening` | 760 | +0.0539 | [+0.0257, +0.0859] | 0.00 | worse (CI > 0) |
-| `gradient-boosting` | `market:pinnacle-opening` | 760 | +0.0553 | [+0.0323, +0.0778] | 0.00 | worse (CI > 0) |
+| `ensemble:mean` | `market:pinnacle-opening` | 760 | +0.0116 | [+0.0011, +0.0214] | 0.01 | worse (CI > 0) |
+| `bayes:gamma-poisson` | `market:pinnacle-opening` | 760 | +0.0138 | [+0.0019, +0.0259] | 0.01 | worse (CI > 0) |
+| `logistic` | `market:pinnacle-opening` | 760 | +0.0159 | [+0.0027, +0.0282] | 0.01 | worse (CI > 0) |
+| `dixon-coles` | `market:pinnacle-opening` | 760 | +0.0199 | [+0.0030, +0.0394] | 0.01 | worse (CI > 0) |
+| `poisson` | `market:pinnacle-opening` | 760 | +0.0206 | [+0.0036, +0.0398] | 0.01 | worse (CI > 0) |
+| `elo` | `market:pinnacle-opening` | 760 | +0.0220 | [+0.0091, +0.0338] | 0.00 | worse (CI > 0) |
+| `gradient-boosting` | `market:pinnacle-opening` | 760 | +0.0523 | [+0.0299, +0.0739] | 0.00 | worse (CI > 0) |
 | `baseline:base-rate` | `market:pinnacle-opening` | 760 | +0.0904 | [+0.0642, +0.1161] | 0.00 | worse (CI > 0) |
 | `baseline:uniform` | `market:pinnacle-opening` | 760 | +0.1055 | [+0.0725, +0.1398] | 0.00 | worse (CI > 0) |
 
@@ -294,7 +294,7 @@ Parameters estimated on the **train seasons only**: second-half share of goals =
 |---|---|---|---|---|---|---|
 | train | 1520 | 0.9941 | 0.7999 | -0.1942 [-0.2265, -0.1631] | 0.5896 | 0.4657 |
 | validation | 380 | 0.9214 | 0.8008 | -0.1206 [-0.1822, -0.0581] | 0.5425 | 0.4733 |
-| test | 760 | 1.0464 | 0.8657 | -0.1807 [-0.2318, -0.1304] | 0.6189 | 0.5071 |
+| test | 760 | 1.0130 | 0.8583 | -0.1547 [-0.2006, -0.1091] | 0.6048 | 0.5043 |
 
 NBA live final-margin dispersion σ = **11.58 points**, estimated by maximum likelihood on 14208 FiveThirtyEight nba-elo home games (2005-2015).
 
@@ -302,9 +302,9 @@ Feed-latency handling is tested in `tests/test_live.py`: `OK` → `DELAYED` (wit
 
 ## 4. Monte Carlo
 
-* Exact-score sampling vs analytic Dixon-Coles probabilities on 50 real test fixtures (20,000 sims each): max |error| = **0.0058**, mean 0.0026.
+* Exact-score sampling vs analytic Dixon-Coles probabilities on 50 real test fixtures (20,000 sims each): max |error| = **0.0058**, mean 0.0027.
 * Same seed → identical results: **True**; different seed → different draws: **True**.
-* Season simulation EPL 2025-26 from 2026-01-01 (10,000 runs, seed 20261031): actual final points fell inside the 90% interval for **17/20** teams (≈18 expected if calibrated). Simulated favourite: **Arsenal** (P(title)=0.52). Actual champion: **Arsenal**.
+* Season simulation EPL 2025-26 from 2026-01-01 (10,000 runs, seed 20261031): actual final points fell inside the 90% interval for **17/20** teams (≈18 expected if calibrated). Simulated favourite: **Arsenal** (P(title)=0.65). Actual champion: **Arsenal**.
 
 ## 5. Strategy research (virtual bankroll, historical)
 
@@ -313,27 +313,27 @@ Prices: football = Pinnacle **opening** odds (known at forecast time), with CLV 
 | sport | model | period | strategy | positions | virtual ROI [95% CI] | P(ROI>0) | virtual P&L | max DD | hit rate (exp.) | CLV |
 |---|---|---|---|---|---|---|---|---|---|---|
 | football | `dixon-coles+temp` | in-sample(train+val) | fixed-1u | 1558 | -4.38% [-11.69%, +3.18%] | 0.13 | -68.2 | 7.2% | 0.358 (0.443) | -3.20% |
-| football | `dixon-coles+temp` | out-of-sample(test) | fixed-1u | 490 | +0.83% [-13.15%, +14.45%] | 0.55 | +4.1 | 3.2% | 0.371 (0.457) | -3.89% |
+| football | `dixon-coles+temp` | out-of-sample(test) | fixed-1u | 475 | +3.88% [-10.54%, +17.92%] | 0.70 | +18.4 | 3.2% | 0.368 (0.426) | -3.64% |
 | football | `dixon-coles+temp` | in-sample(train+val) | fixed-1u+uncertainty-k1 | 800 | -3.09% [-13.35%, +6.83%] | 0.27 | -24.7 | 5.6% | 0.378 (0.495) | -3.16% |
-| football | `dixon-coles+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 276 | -11.51% [-26.98%, +4.41%] | 0.09 | -31.8 | 5.0% | 0.348 (0.509) | -3.33% |
+| football | `dixon-coles+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 258 | -5.15% [-21.08%, +12.59%] | 0.27 | -13.3 | 4.3% | 0.364 (0.473) | -3.12% |
 | football | `dixon-coles+temp` | in-sample(train+val) | fraction-2pct+dd-stop-25pct | 57 | -24.60% [-56.36%, +9.91%] | 0.07 | -249.9 | 25.2% | 0.316 (0.445) | -0.92% |
 | football | `dixon-coles+temp` | out-of-sample(test) | fraction-2pct+dd-stop-25pct | 47 | -19.20% [-50.71%, +15.44%] | 0.12 | -174.7 | 27.5% | 0.340 (0.403) | -3.76% |
 | football | `elo+temp` | in-sample(train+val) | fixed-1u | 1618 | -3.25% [-10.72%, +4.98%] | 0.22 | -52.5 | 8.3% | 0.337 (0.422) | -3.24% |
-| football | `elo+temp` | out-of-sample(test) | fixed-1u | 504 | -3.38% [-16.08%, +9.73%] | 0.30 | -17.0 | 5.4% | 0.361 (0.443) | -4.04% |
+| football | `elo+temp` | out-of-sample(test) | fixed-1u | 494 | -7.45% [-19.44%, +5.11%] | 0.12 | -36.8 | 5.4% | 0.346 (0.424) | -3.84% |
 | football | `elo+temp` | in-sample(train+val) | fixed-1u+uncertainty-k1 | 905 | -5.62% [-15.40%, +3.82%] | 0.13 | -50.9 | 6.5% | 0.326 (0.451) | -3.22% |
-| football | `elo+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 256 | -0.96% [-18.40%, +16.32%] | 0.45 | -2.5 | 2.5% | 0.371 (0.472) | -4.05% |
+| football | `elo+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 239 | -1.78% [-18.90%, +16.59%] | 0.41 | -4.3 | 2.5% | 0.368 (0.447) | -3.73% |
 | football | `elo+temp` | in-sample(train+val) | fraction-2pct+dd-stop-25pct | 25 | -55.46% [-93.02%, -9.13%] | 0.01 | -251.9 | 25.2% | 0.160 (0.378) | -2.08% |
 | football | `elo+temp` | out-of-sample(test) | fraction-2pct+dd-stop-25pct | 26 | -54.23% [-87.69%, -14.79%] | 0.01 | -257.8 | 26.6% | 0.192 (0.353) | -2.69% |
 | football | `ensemble:mean+temp` | in-sample(train+val) | fixed-1u | 1564 | -5.14% [-12.69%, +2.51%] | 0.10 | -80.4 | 8.2% | 0.352 (0.429) | -3.16% |
-| football | `ensemble:mean+temp` | out-of-sample(test) | fixed-1u | 471 | -8.68% [-21.49%, +5.04%] | 0.10 | -40.9 | 5.5% | 0.338 (0.420) | -3.60% |
+| football | `ensemble:mean+temp` | out-of-sample(test) | fixed-1u | 462 | -7.85% [-21.26%, +6.35%] | 0.12 | -36.3 | 5.4% | 0.338 (0.409) | -3.57% |
 | football | `ensemble:mean+temp` | in-sample(train+val) | fixed-1u+uncertainty-k1 | 745 | -1.39% [-12.41%, +9.37%] | 0.39 | -10.3 | 3.8% | 0.354 (0.461) | -3.08% |
-| football | `ensemble:mean+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 194 | -5.36% [-23.02%, +13.73%] | 0.30 | -10.4 | 3.3% | 0.376 (0.474) | -4.38% |
+| football | `ensemble:mean+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 195 | -3.33% [-21.98%, +17.14%] | 0.38 | -6.5 | 3.3% | 0.379 (0.474) | -3.78% |
 | football | `ensemble:mean+temp` | in-sample(train+val) | fraction-2pct+dd-stop-25pct | 35 | -40.17% [-77.44%, +3.57%] | 0.04 | -246.1 | 25.1% | 0.229 (0.397) | -3.29% |
 | football | `ensemble:mean+temp` | out-of-sample(test) | fraction-2pct+dd-stop-25pct | 43 | -28.67% [-62.07%, +10.81%] | 0.07 | -222.8 | 26.5% | 0.279 (0.383) | -1.73% |
 | football | `logistic+temp` | in-sample(train+val) | fixed-1u | 1620 | -7.73% [-14.97%, -0.43%] | 0.02 | -125.3 | 14.0% | 0.344 (0.438) | -2.62% |
-| football | `logistic+temp` | out-of-sample(test) | fixed-1u | 471 | -4.59% [-18.18%, +9.42%] | 0.24 | -21.6 | 3.5% | 0.335 (0.408) | -3.36% |
+| football | `logistic+temp` | out-of-sample(test) | fixed-1u | 468 | -8.85% [-22.02%, +4.68%] | 0.10 | -41.4 | 5.1% | 0.325 (0.406) | -3.13% |
 | football | `logistic+temp` | in-sample(train+val) | fixed-1u+uncertainty-k1 | 922 | -4.96% [-14.88%, +5.12%] | 0.16 | -45.7 | 7.4% | 0.342 (0.461) | -2.80% |
-| football | `logistic+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 192 | -1.12% [-20.91%, +19.85%] | 0.46 | -2.1 | 2.4% | 0.354 (0.436) | -3.74% |
+| football | `logistic+temp` | out-of-sample(test) | fixed-1u+uncertainty-k1 | 202 | -8.37% [-26.40%, +10.55%] | 0.22 | -16.9 | 2.5% | 0.337 (0.439) | -3.45% |
 | football | `logistic+temp` | in-sample(train+val) | fraction-2pct+dd-stop-25pct | 42 | -33.89% [-67.45%, +6.57%] | 0.05 | -253.0 | 26.3% | 0.262 (0.461) | -2.94% |
 | football | `logistic+temp` | out-of-sample(test) | fraction-2pct+dd-stop-25pct | 51 | -27.79% [-61.25%, +10.72%] | 0.07 | -256.0 | 27.8% | 0.275 (0.388) | -2.02% |
 | tennis | `elo+temp` | in-sample(train+val) | fixed-1u | 6875 | -5.28% [-8.78%, -1.80%] | 0.00 | -362.9 | 37.2% | 0.351 (0.468) | — |
@@ -361,13 +361,13 @@ Control: the de-vigged market judged against its own prices selected **0** posit
 
 The `fraction-1pct` and `fixed-1u+commission-2pct` variants are in `reports/artifacts/backtest_summary.parquet` and in the dashboard (Backtesting, Virtual Bankroll).
 
-**Adverse selection:** on the positions selected (`fixed-1u`), the realised hit rate averaged **0.347**, while the model expected **0.446**. When a model disagrees with a sharp price by ≥3%, the model is usually the one that is wrong. The consistently negative CLV in football (the price taken is worse than the closing fair price) points the same way.
+**Adverse selection:** on the positions selected (`fixed-1u`), the realised hit rate averaged **0.345**, while the model expected **0.442**. When a model disagrees with a sharp price by ≥3%, the model is usually the one that is wrong. The consistently negative CLV in football (the price taken is worse than the closing fair price) points the same way.
 
-**Independent cross-check:** flat 1-unit P&L recomputed with `backtestbuddy` on the same selections for 7 model/sport combinations. Identical: **True** (max |diff| = 7.11e-15). Virtual journal run: `bt-20261031T220443-2caa79`.
+**Independent cross-check:** flat 1-unit P&L recomputed with `backtestbuddy` on the same selections for 7 model/sport combinations. Identical: **True** (max |diff| = 7.11e-15). Virtual journal run: `bt-20261031T225539-2ae3cd`.
 
 ## 6. Conclusions (read with the CIs)
 
-* **football** — best lab model on test: `ensemble:mean` (LL 1.0086); vs base-rate Δ=-0.0749 [-0.0990, -0.0501]; vs `market:pinnacle-closing` (LL 0.9739) Δ=+0.0183 [+0.0033, +0.0319]; vs `market:pinnacle-opening` (LL 0.9931) Δ=+0.0155 [+0.0037, +0.0268].
+* **football** — best lab model on test: `ensemble:mean` (LL 1.0047); vs base-rate Δ=-0.0787 [-0.1022, -0.0537]; vs `market:pinnacle-closing` (LL 0.9739) Δ=+0.0129 [+0.0001, +0.0252]; vs `market:pinnacle-opening` (LL 0.9931) Δ=+0.0116 [+0.0011, +0.0214].
 * **hockey** — best lab model on test: `logistic` (LL 0.6788); vs base-rate Δ=-0.0121 [-0.0190, -0.0056].
 * **basketball** — best lab model on test: `ensemble:mean+temp` (LL 0.6454); vs base-rate Δ=-0.0450 [-0.0562, -0.0341]; vs `external:fivethirtyeight` (LL 0.6291) Δ=+0.0164 [+0.0052, +0.0271].
 * **tennis** — best lab model on test: `logistic` (LL 0.6098); vs base-rate Δ=-0.0833 [-0.0991, -0.0669]; vs `market:pinnacle-single` (LL 0.5751) Δ=+0.0351 [+0.0259, +0.0442].
