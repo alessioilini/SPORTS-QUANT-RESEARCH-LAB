@@ -1,0 +1,5 @@
+# Third-party research libraries, pinned to audited commits (MIT licensed).
+backtestbuddy @ git+https://github.com/Pacman1984/backtestbuddy.git@0cb9dd90163845061cac5b455f8c4fdba13c6f22
+betting-backtester @ git+https://github.com/R1ch1k/betting-backtester.git@a941b246630819bf1c9fa2bb7285d9846440ef62
+# Read-only data CLI used by the installed football/nba/nhl/tennis-data skills (no extras: no trading clients).
+sports-skills @ git+https://github.com/machina-sports/sports-skills.git@940f346c978f1abd39077f1ebddd27866613ef22

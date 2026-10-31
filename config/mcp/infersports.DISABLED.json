@@ -1,0 +1,19 @@
+{
+  "_status": "DISABLED - not connected",
+  "_why": [
+    "Official InferSports endpoint/documentation could not be verified from this environment (only third-party directory listings were found).",
+    "infersports.com and api.infersports.com are refused by this environment's egress proxy (HTTP 403 on CONNECT)."
+  ],
+  "_how_to_enable": [
+    "1. Obtain the endpoint URL from InferSports' own documentation and verify it.",
+    "2. Confirm every exposed tool is read-only (live scores, schedule, historical/current odds, de-vigged probabilities).",
+    "3. Copy the 'mcpServers' block below into the project .mcp.json with the verified URL.",
+    "4. Keep the permissions allow-list limited to read tools; this lab never places real bets."
+  ],
+  "mcpServers": {
+    "infersports": {
+      "type": "http",
+      "url": "<VERIFIED_OFFICIAL_INFERSPORTS_MCP_URL>"
+    }
+  }
+}

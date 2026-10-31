@@ -1,0 +1,346 @@
+{
+  "generated_at": "2026-10-31T21:16:43+00:00",
+  "installed": [
+    {
+      "name": "football-data",
+      "repo": "machina-sports/sports-skills",
+      "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
+      "path": "skills/football-data",
+      "sha256": "3d8938a9d1ac024a9b3c7fe5b0a49d91a08c3e524915707f57c9e65cd7a10585",
+      "status": "unchanged"
+    },
+    {
+      "name": "nba-data",
+      "repo": "machina-sports/sports-skills",
+      "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
+      "path": "skills/nba-data",
+      "sha256": "8b4c9553ae6d52e8f9a6ea6745b3de405b38aad3f6a364a49533c3a4e444a9bd",
+      "status": "unchanged"
+    },
+    {
+      "name": "nhl-data",
+      "repo": "machina-sports/sports-skills",
+      "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
+      "path": "skills/nhl-data",
+      "sha256": "9a0b2c1f67019d700cd04668d2a46fdb93df0729a4f5883edad0d78f175e56bb",
+      "status": "unchanged"
+    },
+    {
+      "name": "tennis-data",
+      "repo": "machina-sports/sports-skills",
+      "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
+      "path": "skills/tennis-data",
+      "sha256": "91f3b7b155fbbcfedb043a20c867dd6f061cf46da9651abf344c6dc7aee5fda9",
+      "status": "unchanged"
+    },
+    {
+      "name": "espn-api",
+      "repo": "machina-sports/sports-skills",
+      "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
+      "path": "skills/espn-api",
+      "sha256": "ffff8e066ce60c2b9521d3001c3486e7f571aa43c53e5c169cf5d51669a78cbd",
+      "status": "unchanged"
+    },
+    {
+      "name": "metadata",
+      "repo": "machina-sports/sports-skills",
+      "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
+      "path": "skills/metadata",
+      "sha256": "696011d7c84e59631626f1f1eb7ccbfaadf763d15060eed195eb37a80dca19b7",
+      "status": "replaced"
+    },
+    {
+      "name": "sports-news",
+      "repo": "machina-sports/sports-skills",
+      "commit": "940f346c978f1abd39077f1ebddd27866613ef22",
+      "path": "skills/sports-news",
+      "sha256": "cb43f4b4fa6a6b1758b21ceb297995daa2c0b948b9c35ebae2417b8ddc16b707",
+      "status": "unchanged"
+    },
+    {
+      "name": "eda-sports",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/eda-sports",
+      "sha256": "f19f1599385771dd84bdb0479a60d9f203eba88bbdd9134e24574a37dfa97273",
+      "status": "unchanged"
+    },
+    {
+      "name": "feature-rules",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/feature-rules",
+      "sha256": "afb50764aa36dc01e1b18940bd30e43e7ac62f25dd3b105eb18504ca2546b28a",
+      "status": "unchanged"
+    },
+    {
+      "name": "leakage-audit",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/leakage-audit",
+      "sha256": "50506eda74296bf0d998afb311ae256f99d921c3cbe0eb91b2eb61600aef1ac2",
+      "status": "unchanged"
+    },
+    {
+      "name": "predictive-modeling",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/predictive-modeling",
+      "sha256": "12a545a66fb42e4b25f404cf776d8475ee70276605d9649b5613cb713eb95bce",
+      "status": "unchanged"
+    },
+    {
+      "name": "baseline-models",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/baseline-models",
+      "sha256": "1a4082d2ebc637c78dc7458c5bc31b4fa25a9393110487d60cdef960c46fa94b",
+      "status": "unchanged"
+    },
+    {
+      "name": "validation-design",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/validation-design",
+      "sha256": "4815f1e850d30eea5a7a1f3c0d0508b91bac6b7b1d6cb5d9905168fbada019f4",
+      "status": "unchanged"
+    },
+    {
+      "name": "calibration-check",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/calibration-check",
+      "sha256": "240734aecf9f7b0c943bcc0f708379b2e4b345203d787636659e1308b218ca8c",
+      "status": "unchanged"
+    },
+    {
+      "name": "simulation-sports",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/simulation-sports",
+      "sha256": "8e571599b5ee3e96a79c2a1829de72791dd3f5bfc5bb2224bb1e9a0976b21035",
+      "status": "unchanged"
+    },
+    {
+      "name": "results-reporting",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/results-reporting",
+      "sha256": "5186da72c0bfef2e5a0ac44ca1d31ecda235bc412d82453648b53f51e02b9327",
+      "status": "unchanged"
+    },
+    {
+      "name": "ratings-strength-models",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/ratings-strength-models",
+      "sha256": "0d7db7146af76131ca14c755ac886e30a08156800722b6d78ddece1fa135aa0c",
+      "status": "unchanged"
+    },
+    {
+      "name": "statistical-modeling",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/statistical-modeling",
+      "sha256": "631daa1ed686d5062fecfec4699dd8e1828641b5cdddb6233d29b698de88031a",
+      "status": "unchanged"
+    },
+    {
+      "name": "time-series-sports",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/time-series-sports",
+      "sha256": "de551132c15369799bdf546890b72888200d2630f694b6ceafb8a264c0a0586f",
+      "status": "unchanged"
+    },
+    {
+      "name": "model-card",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/model-card",
+      "sha256": "6315d8037dc604297650753ef13a161f93c192adcfa5da63e60dfc10d0da65f7",
+      "status": "unchanged"
+    },
+    {
+      "name": "experiment-log",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/experiment-log",
+      "sha256": "1207766bd0a29d6ed586e4a02fcc90f5e4e6086abe01ff9581f678763320e5a9",
+      "status": "unchanged"
+    },
+    {
+      "name": "model-interpretation",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/model-interpretation",
+      "sha256": "df3488106dec68f282ce7317ba7b20b42d7f2ef7aaccec50ba88d07dc59f8cd9",
+      "status": "unchanged"
+    },
+    {
+      "name": "sports-modeling-doctrine",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/sports-modeling-doctrine",
+      "sha256": "307127c78498012192da663f7e98acb71180bfff898600d1176a54834cfa4cce",
+      "status": "unchanged"
+    },
+    {
+      "name": "data-sources",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/data-sources",
+      "sha256": "8f27df5cdd15594f42bda983f9ef2c865b737a3f9b9ca67290faba7f12056b84",
+      "status": "unchanged"
+    },
+    {
+      "name": "anti-slop-analytics",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/anti-slop-analytics",
+      "sha256": "41663d95b9c7a6bdc1edb9c5157daddfa0100f5c0d3384faf983d514880ef0ba",
+      "status": "unchanged"
+    },
+    {
+      "name": "sports-visualization",
+      "repo": "WalrusQuant/sports-analytic-skills",
+      "commit": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+      "path": "skills/sports-visualization",
+      "sha256": "6d21c06394ea24cfec12b0be750939703b40dc25e908cf47ea17b33e5e4a66b8",
+      "status": "unchanged"
+    },
+    {
+      "name": "hockey-analytics",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/hockey-analytics",
+      "sha256": "5792cf19e9ae9b6455fb22e0c6cf3e2f725e6461a71fce01754fda051ba28847",
+      "status": "unchanged"
+    },
+    {
+      "name": "xg-model-building",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/xg-model-building",
+      "sha256": "b966d17504056368afd89813cdc3ee2ddb28261d381df00c8296ddb1750ff30a",
+      "status": "unchanged"
+    },
+    {
+      "name": "elo-engineering",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/elo-engineering",
+      "sha256": "ffa025b201ccbe108d47eb3c185bf99049385af1c78c9cd329ccba261e2f42a8",
+      "status": "unchanged"
+    },
+    {
+      "name": "model-building",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/model-building",
+      "sha256": "842b84c544d06c467de0288093d837d90327c60aa6d334ea3df708ad606b18aa",
+      "status": "unchanged"
+    },
+    {
+      "name": "probability-calibration",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/probability-calibration",
+      "sha256": "318d50370da06ed8621fb1e6119dc23021db17275525f33aceb9de8ea1f57473",
+      "status": "unchanged"
+    },
+    {
+      "name": "visualization",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/visualization",
+      "sha256": "e486911dfa13c85b7f75a81d97070c8856c6b1793e8e5ffe729655c08b663ed5",
+      "status": "unchanged"
+    },
+    {
+      "name": "backtesting",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/backtesting",
+      "sha256": "e6a67a095651fc0e997d8b80f62c430857d971e4c57c190448d8da8abce2a2ab",
+      "status": "unchanged"
+    },
+    {
+      "name": "walk-forward-validation",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/walk-forward-validation",
+      "sha256": "20bf566a472848546c4d40b34421e824a69799f19112d8c65728c2f6d753926a",
+      "status": "unchanged"
+    },
+    {
+      "name": "feature-engineering",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/feature-engineering",
+      "sha256": "70753ad441c12837481dd97900f7aad661439c7b740dd59a4e511846b7b27da0",
+      "status": "unchanged"
+    },
+    {
+      "name": "goalie-analysis",
+      "repo": "PuckAPI/claude-sports-analytics",
+      "commit": "d542e7d7935d6be4514f1117057281c344d8683f",
+      "path": "skills/goalie-analysis",
+      "sha256": "02ef96636a83ea1e283f6c3433108baaa18ee6c60a4ed322040c9af7981385ad",
+      "status": "unchanged"
+    },
+    {
+      "name": "superforecasting",
+      "repo": "sloik/superforecasting",
+      "commit": "850824ed6287ec5a6ede8866adc4e0109d333ef6",
+      "path": ".",
+      "sha256": "5cfadbb3528f0e7e313f608331aa3d802d50abc1a74d3cb952d8bccbbf92e804",
+      "status": "unchanged"
+    }
+  ],
+  "conflicts": [],
+  "excluded": {
+    "machina-sports/sports-skills": {
+      "polymarket-trading": "catalog mode=financial_execution, money_movement=true (real trading)",
+      "machina": "catalog mode=premium_mcp, requires secrets / metered billing",
+      "kalshi": "prediction-market module, not sports statistics",
+      "polymarket": "prediction-market module, not sports statistics",
+      "novig": "betting-exchange module, not sports statistics",
+      "prophetx": "betting-exchange module, not sports statistics",
+      "gemini": "prediction-market module, not sports statistics",
+      "markets": "prediction-market aggregator, not sports statistics",
+      "betting": "includes Kelly stake sizing; devig/EV re-implemented in sportslab.ev instead",
+      "world-cup": "catalog risk=high; not needed for the 4 target sports",
+      "*other sports*": "nfl/mlb/cfb/cbb/wnba/gleague/golf/cricket/volleyball/esports/fastf1/xctf: out of scope (4 target sports)",
+      "sports-reporter": "article generation, not data"
+    },
+    "WalrusQuant/sports-analytic-skills": {
+      "nflreadpy": "NFL-specific",
+      "pybaseball": "MLB-specific",
+      "sportsdataverse-py": "US-college/NFL loaders, out of scope",
+      "environment-setup": "runs pip installs; environment handled by scripts/setup_env.sh",
+      "sports-ds-bridge": "bridge to an external toolkit not used here"
+    },
+    "PuckAPI/claude-sports-analytics": {
+      "puckapi-tool": "paid PuckAPI MCP (credits) \u2014 not connected by request",
+      "dispatch": "routes to paid PuckAPI tools",
+      "data-pipeline": "paid PuckAPI ingestion",
+      "nl-to-query": "paid PuckAPI query layer",
+      "game-lookup": "paid PuckAPI lookup",
+      "odds-explorer": "paid PuckAPI odds",
+      "daily-card": "daily real-betting card",
+      "game-preview": "depends on paid PuckAPI data",
+      "bet-tracker": "real bet tracking \u2014 out of scope (virtual journal only)",
+      "edge-detection": "today's-slate real betting edges \u2014 out of scope",
+      "prop-modeling": "player-prop betting via paid API \u2014 out of scope",
+      "*others*": "team-analysis, player-scouting, playoff-simulation, totals-modeling, war-gar-decomposition, ai-hockey-workflow: not requested",
+      ".mcp.json": "PuckAPI MCP server NOT registered (paid API)"
+    }
+  },
+  "repos": {
+    "machina-sports/sports-skills": "940f346c978f1abd39077f1ebddd27866613ef22",
+    "WalrusQuant/sports-analytic-skills": "0f90d2463b7d4c793821cce71fc82d06fcb06a3c",
+    "PuckAPI/claude-sports-analytics": "d542e7d7935d6be4514f1117057281c344d8683f",
+    "sloik/superforecasting": "850824ed6287ec5a6ede8866adc4e0109d333ef6"
+  }
+}

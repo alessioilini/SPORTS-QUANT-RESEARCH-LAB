@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: sportslab
+Version: 0.1.0
+Summary: Sports Quant Research Lab: point-in-time sports data, probabilistic models, virtual-bankroll research simulations
+License: MIT
+Requires-Python: >=3.11

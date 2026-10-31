@@ -1,0 +1,16 @@
+# Local development tooling — present on disk, never published.
+.nightshift/
+.argo/
+.claude/
+.serena/
+_System/
+TODO.md
+
+# Private calibration ledger — the skill resolves it via $FORECAST_LOG or
+# ~/.superforecasting/forecasts.jsonl, so no ledger ever belongs in this repo.
+data/
+
+# Python / macOS noise
+__pycache__/
+*.pyc
+.DS_Store

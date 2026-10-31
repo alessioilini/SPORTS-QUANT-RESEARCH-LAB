@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(sports-skills polymarket-trading:*)",
+      "Bash(sports-skills kalshi:*)",
+      "Bash(sports-skills novig:*)",
+      "Bash(sports-skills prophetx:*)",
+      "Bash(sports-skills storefront:*)",
+      "mcp__puckapi__*"
+    ]
+  }
+}
