@@ -16,6 +16,8 @@ from scipy.optimize import brentq
 def implied_probabilities(decimal_odds) -> np.ndarray:
     """Raw implied probability of each outcome: 1 / decimal odds (sums to > 1)."""
     o = np.asarray(decimal_odds, dtype=float)
+    if not np.all(np.isfinite(o)):
+        raise ValueError("odds missing (NaN) — price UNKNOWN, cannot compute implied probability")
     if np.any(o <= 1.0):
         raise ValueError("decimal odds must be > 1")
     return 1.0 / o

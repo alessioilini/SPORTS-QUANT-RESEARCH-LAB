@@ -1,0 +1,221 @@
+{
+  "disclaimer": "Research & education only. Probabilities are model estimates with uncertainty; all bankroll figures are VIRTUAL units from historical simulations. This software does not place, size or recommend real bets.",
+  "event": {
+    "event_id": "FB-EPL-20260108-Arsenal-Liverpool",
+    "match": "Arsenal vs Liverpool",
+    "competition": "EPL",
+    "season": "2025-26",
+    "kickoff_utc": "2026-01-08 20:00:00+00:00",
+    "forecast_time_utc": "2026-01-06 16:00:00+00:00",
+    "forecast_time_rule": "opening-odds collection instant (Fri/Tue 16:00 UK, approx)"
+  },
+  "information_set": {
+    "results_used": 2860,
+    "last_result_used_available_at": "2026-01-04 20:00:00+00:00",
+    "lookahead_check": "all results used have available_at <= forecast_time"
+  },
+  "models": {
+    "dixon_coles": {
+      "lambda_home": 1.7963594252561863,
+      "mu_away": 1.094319433030372,
+      "rho": -0.024551596550573644,
+      "home_adv_log": 0.17216918416775703,
+      "hyperparameters(tuned on 2023-24 only)": {
+        "xi": 0.001,
+        "ridge": 0.01
+      },
+      "probs": {
+        "H": 0.5354124705707154,
+        "D": 0.23701095581535558,
+        "A": 0.22757657361392908
+      }
+    },
+    "monte_carlo(dixon-coles, n=20000, seed=20261031)": {
+      "H": 0.5387,
+      "D": 0.2356,
+      "A": 0.2257,
+      "over_2.5": 0.55065,
+      "mc_se": 0.0035249277297556047
+    },
+    "bayes_gamma_poisson": {
+      "probs": {
+        "H": 0.5805071156045734,
+        "D": 0.22319384074824936,
+        "A": 0.1962990436471772
+      },
+      "posterior_sd_of_P(H)": 0.1081901058652908
+    },
+    "walk_forward_artifacts": {
+      "elo": {
+        "H": 0.6208488131206671,
+        "D": 0.19656922364178642,
+        "A": 0.1825819632375465
+      },
+      "logistic": {
+        "H": 0.5984926000472175,
+        "D": 0.22825824080931292,
+        "A": 0.1732491591434696
+      },
+      "gradient-boosting": {
+        "H": 0.6765847649440286,
+        "D": 0.22786421209828153,
+        "A": 0.09555102295768975
+      },
+      "ensemble:mean+temp": {
+        "H": 0.6108128881376251,
+        "D": 0.20832129159989285,
+        "A": 0.1808658202624821
+      }
+    }
+  },
+  "market(OBSERVED, Pinnacle)": {
+    "opening_odds": {
+      "H": 1.6,
+      "D": 4.35,
+      "A": 5.49
+    },
+    "opening_devig": {
+      "H": 0.602680092364765,
+      "D": 0.22167543627209751,
+      "A": 0.17564447136313735
+    },
+    "closing_odds(after forecast_time; benchmark only)": {
+      "H": 1.59,
+      "D": 4.4,
+      "A": 5.75
+    }
+  },
+  "ev_explanation(education)": "1) Implied probability q = 1/odds:\n   H: 1/1.600 = 0.6250\n   D: 1/4.350 = 0.2299\n   A: 1/5.490 = 0.1821\n2) Overround \u03a3q = 1.0370 -> bookmaker margin 3.70%\n3) Fair (de-vigged) probabilities:\n   H: multiplicative 0.6027 | Shin 0.6101\n   D: multiplicative 0.2217 | Shin 0.2186\n   A: multiplicative 0.1756 | Shin 0.1713\n4) Expected value per 1 virtual unit, EV = p*odds - 1 (p from a MODEL, uncertain):\n   H: 0.6108*1.600-1 = -0.0227\n   D: 0.2083*4.350-1 = -0.0938\n   A: 0.1809*5.490-1 = -0.0070\n   A positive EV only means the model disagrees with the market; it is not evidence of an edge unless the model is shown to be better calibrated out-of-sample.",
+  "data_sources": [
+    {
+      "source_id": "football_epl_1819",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:26+00:00",
+      "sha256": "4a44573970f0f693b98889cf5667aafb422d19f185ee63e20022c31b132fe881",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/1819/E0.csv"
+    },
+    {
+      "source_id": "football_epl_1920",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:26+00:00",
+      "sha256": "92bf96bebc4fdd4412c5f99ee40b0a5131815ca07150b17e34690d8fcfa217a8",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/1920/E0.csv"
+    },
+    {
+      "source_id": "football_epl_2021",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:26+00:00",
+      "sha256": "5fe0773d57db8d4598db8e567543bd44bccedd08b4af3f6cb647d25852417ecf",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/2021/E0.csv"
+    },
+    {
+      "source_id": "football_epl_2122",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:27+00:00",
+      "sha256": "95d1dd4afacfb96754b232d958b4972929a5828daa7b6a957edd7690edfc0481",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/2122/E0.csv"
+    },
+    {
+      "source_id": "football_epl_2223",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:27+00:00",
+      "sha256": "e51361323bcdcdcec2faf8f58e7bcfc4f5b193ed6017b284c71538ed70d98ea2",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/2223/E0.csv"
+    },
+    {
+      "source_id": "football_epl_2324",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:28+00:00",
+      "sha256": "0b669038e94bf305603d841f02006c7d35ebd41c8722c76e479f2393079b995f",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/2324/E0.csv"
+    },
+    {
+      "source_id": "football_epl_2425",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:28+00:00",
+      "sha256": "316173b11634e5fdb836b0f3f9b4728df5044a44e1539361b6bdf18f0d3909a1",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/2425/E0.csv"
+    },
+    {
+      "source_id": "football_epl_2526",
+      "original_provider": "football-data.co.uk (E0.csv, English Premier League)",
+      "host_repo": "Mentat-Uran/ScoutFootball_for_World_Cup@4be5e5d704",
+      "retrieved_at": "2026-10-31T21:21:28+00:00",
+      "sha256": "bfa8585d7a6a5147041d1f1c33fb82c1882f4dbedda3c70c72b11c6b24a74ad2",
+      "url": "https://raw.githubusercontent.com/Mentat-Uran/ScoutFootball_for_World_Cup/4be5e5d70460442182fbf4cab107d4c4497ecd86/data/raw/football_data/2526/E0.csv"
+    }
+  ],
+  "odds_provenance": [
+    {
+      "snapshot": "closing",
+      "selection": "A",
+      "price": 5.75,
+      "observed_at": "2026-01-08T20:00:00Z",
+      "observed_at_precision": "approx",
+      "source_id": "football_epl_2526"
+    },
+    {
+      "snapshot": "opening",
+      "selection": "A",
+      "price": 5.49,
+      "observed_at": "2026-01-06T16:00:00Z",
+      "observed_at_precision": "approx",
+      "source_id": "football_epl_2526"
+    },
+    {
+      "snapshot": "closing",
+      "selection": "D",
+      "price": 4.4,
+      "observed_at": "2026-01-08T20:00:00Z",
+      "observed_at_precision": "approx",
+      "source_id": "football_epl_2526"
+    },
+    {
+      "snapshot": "opening",
+      "selection": "D",
+      "price": 4.35,
+      "observed_at": "2026-01-06T16:00:00Z",
+      "observed_at_precision": "approx",
+      "source_id": "football_epl_2526"
+    },
+    {
+      "snapshot": "closing",
+      "selection": "H",
+      "price": 1.59,
+      "observed_at": "2026-01-08T20:00:00Z",
+      "observed_at_precision": "approx",
+      "source_id": "football_epl_2526"
+    },
+    {
+      "snapshot": "opening",
+      "selection": "H",
+      "price": 1.6,
+      "observed_at": "2026-01-06T16:00:00Z",
+      "observed_at_precision": "approx",
+      "source_id": "football_epl_2526"
+    }
+  ],
+  "unknown_inputs": [
+    "lineups",
+    "injuries",
+    "player availability",
+    "weather"
+  ],
+  "actual_result(OBSERVED, revealed after the fact)": {
+    "score": "0-0",
+    "outcome": "D"
+  },
+  "forecast_log": {
+    "forecast_id": "c59c2641-f6ba-4efc-ae31-02e6c7122ce8",
+    "outcome": "D",
+    "brier": 1.0325600065883092,
+    "log_loss": 1.5686737199048624
+  }
+}

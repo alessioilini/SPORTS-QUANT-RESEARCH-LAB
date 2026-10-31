@@ -21,5 +21,6 @@ if __name__ == "__main__":
     ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
     q.to_parquet(ARTIFACTS_DIR / "data_quality.parquet", index=False)
     print(q.to_string(index=False, max_colwidth=70))
-    print(f"\n{(q.status == 'PASS').sum()}/{len(q)} checks PASS  ({time.time() - t0:.1f}s)")
-    sys.exit(0 if (q.status == "PASS").all() else 1)
+    print(f"\n{(q.status == 'PASS').sum()}/{len(q)} PASS, {(q.status == 'WARN').sum()} WARN, "
+          f"{(q.status == 'FAIL').sum()} FAIL  ({time.time() - t0:.1f}s)")
+    sys.exit(1 if (q.status == "FAIL").any() else 0)

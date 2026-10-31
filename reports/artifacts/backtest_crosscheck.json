@@ -1,0 +1,68 @@
+{
+  "run_id": "bt-20261031T220443-2caa79",
+  "crosscheck": [
+    {
+      "sport": "football",
+      "model": "ensemble:mean+temp",
+      "n": 471,
+      "ours_pnl": -40.89999999999999,
+      "backtestbuddy_pnl": -40.9,
+      "abs_diff": 7.105427357601002e-15,
+      "backtestbuddy_bets": 471
+    },
+    {
+      "sport": "football",
+      "model": "dixon-coles+temp",
+      "n": 490,
+      "ours_pnl": 4.069999999999997,
+      "backtestbuddy_pnl": 4.0699999999999985,
+      "abs_diff": 1.7763568394002505e-15,
+      "backtestbuddy_bets": 490
+    },
+    {
+      "sport": "football",
+      "model": "logistic+temp",
+      "n": 471,
+      "ours_pnl": -21.619999999999997,
+      "backtestbuddy_pnl": -21.619999999999994,
+      "abs_diff": 3.552713678800501e-15,
+      "backtestbuddy_bets": 471
+    },
+    {
+      "sport": "football",
+      "model": "elo+temp",
+      "n": 504,
+      "ours_pnl": -17.019999999999992,
+      "backtestbuddy_pnl": -17.019999999999996,
+      "abs_diff": 3.552713678800501e-15,
+      "backtestbuddy_bets": 504
+    },
+    {
+      "sport": "tennis",
+      "model": "ensemble:mean+temp",
+      "n": 1300,
+      "ours_pnl": -191.88,
+      "backtestbuddy_pnl": -191.88,
+      "abs_diff": 0.0,
+      "backtestbuddy_bets": 1300
+    },
+    {
+      "sport": "tennis",
+      "model": "logistic+temp",
+      "n": 1321,
+      "ours_pnl": -151.71,
+      "backtestbuddy_pnl": -151.71,
+      "abs_diff": 0.0,
+      "backtestbuddy_bets": 1321
+    },
+    {
+      "sport": "tennis",
+      "model": "elo+temp",
+      "n": 1341,
+      "ours_pnl": -192.04,
+      "backtestbuddy_pnl": -192.04,
+      "abs_diff": 0.0,
+      "backtestbuddy_bets": 1341
+    }
+  ]
+}

@@ -8,7 +8,7 @@ from sportslab.config import RAW_DIR
 from sportslab.data.sources import REGISTRY
 
 
-def _row(check, sport, ok, value, detail=""):
+def _row(check, sport, ok, value, detail=""):   # status PASS | FAIL (WARN rows are added explicitly)
     return dict(check=check, sport=sport, status="PASS" if ok else "FAIL", value=value, detail=detail)
 
 
@@ -43,6 +43,15 @@ def run_checks(t: dict[str, pd.DataFrame]) -> pd.DataFrame:
             if len(pre):
                 ok = bool((pd.to_datetime(pre.available_at) <= pd.to_datetime(pre.forecast_time)).all())
                 rows.append(_row("opening_odds_known_at_forecast_time", sport, ok, len(pre)))
+        if len(o):
+            cov = (o[o.selection == "H"].merge(e[["event_id", "season"]], on="event_id")
+                   .groupby(["bookmaker", "snapshot", "season"]).event_id.nunique()
+                   / e.groupby("season").size())
+            gaps = cov[cov < 0.999]
+            rows.append(dict(check="odds_coverage_by_book_season", sport=sport,
+                             status="WARN" if len(gaps) else "PASS", value=str(len(gaps)),
+                             detail="; ".join(f"{b}/{sn}/{se}: {v:.0%}" for (b, sn, se), v in gaps.items())[:400]
+                             or "complete"))
         per_season = e.groupby("season").size()
         rows.append(_row("events_per_season", sport, True, int(per_season.min()),
                          "; ".join(f"{k}:{v}" for k, v in per_season.items())))

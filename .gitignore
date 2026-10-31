@@ -7,5 +7,4 @@ data/raw/
 data/processed/
 data/*.sqlite
 data/*.sqlite-*
-reports/artifacts/
 .streamlit/secrets.toml

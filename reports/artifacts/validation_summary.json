@@ -1,0 +1,274 @@
+{
+  "timing": {
+    "football": {
+      "baseline:uniform": {
+        "seconds": 0.7,
+        "refits": 0
+      },
+      "baseline:base-rate": {
+        "seconds": 0.6,
+        "refits": 0
+      },
+      "elo": {
+        "seconds": 2.0,
+        "refits": 0
+      },
+      "dixon-coles": {
+        "seconds": 5.0,
+        "refits": 234
+      },
+      "poisson": {
+        "seconds": 4.8,
+        "refits": 234
+      },
+      "bayes:gamma-poisson": {
+        "seconds": 2.8,
+        "refits": 0
+      },
+      "logistic": {
+        "seconds": 7.6,
+        "refits": 68
+      },
+      "gradient-boosting": {
+        "seconds": 32.6,
+        "refits": 68
+      },
+      "market:pinnacle-opening": {
+        "seconds": 1.0,
+        "refits": 0
+      }
+    },
+    "hockey": {
+      "baseline:uniform": {
+        "seconds": 2.8,
+        "refits": 0
+      },
+      "baseline:base-rate": {
+        "seconds": 3.0,
+        "refits": 0
+      },
+      "elo": {
+        "seconds": 6.0,
+        "refits": 0
+      },
+      "dixon-coles": {
+        "seconds": 9.9,
+        "refits": 221
+      },
+      "poisson": {
+        "seconds": 10.1,
+        "refits": 221
+      },
+      "bayes:gamma-poisson": {
+        "seconds": 8.8,
+        "refits": 0
+      },
+      "bayes:gaussian-rating": {
+        "seconds": 9.9,
+        "refits": 0
+      },
+      "logistic": {
+        "seconds": 20.6,
+        "refits": 59
+      },
+      "gradient-boosting": {
+        "seconds": 50.5,
+        "refits": 59
+      }
+    },
+    "basketball": {
+      "baseline:uniform": {
+        "seconds": 2.5,
+        "refits": 0
+      },
+      "baseline:base-rate": {
+        "seconds": 2.6,
+        "refits": 0
+      },
+      "elo": {
+        "seconds": 5.3,
+        "refits": 0
+      },
+      "bayes:gaussian-rating": {
+        "seconds": 8.3,
+        "refits": 0
+      },
+      "logistic": {
+        "seconds": 21.6,
+        "refits": 53
+      },
+      "gradient-boosting": {
+        "seconds": 530.7,
+        "refits": 53
+      },
+      "external:fivethirtyeight": {
+        "seconds": 3.2,
+        "refits": 0
+      }
+    },
+    "tennis": {
+      "baseline:uniform": {
+        "seconds": 2.6,
+        "refits": 0
+      },
+      "baseline:base-rate": {
+        "seconds": 2.8,
+        "refits": 0
+      },
+      "elo": {
+        "seconds": 6.8,
+        "refits": 0
+      },
+      "bayes:gaussian-rating": {
+        "seconds": 10.8,
+        "refits": 0
+      },
+      "logistic": {
+        "seconds": 21.9,
+        "refits": 50
+      },
+      "gradient-boosting": {
+        "seconds": 33.6,
+        "refits": 50
+      },
+      "baseline:rank-logit": {
+        "seconds": 24.3,
+        "refits": 50
+      }
+    }
+  },
+  "calibrators": {
+    "football": {
+      "baseline:base-rate": 0.9245063086712805,
+      "elo": 0.9819552761959776,
+      "dixon-coles": 0.9078667362832978,
+      "poisson": 0.898395687300766,
+      "bayes:gamma-poisson": 0.8645322391757003,
+      "logistic": 0.9906983060995957,
+      "gradient-boosting": 1.2203559168676557,
+      "ensemble:mean": 0.8989201260078721
+    },
+    "hockey": {
+      "baseline:base-rate": 0.6933501305958004,
+      "elo": 1.0721506395550362,
+      "dixon-coles": 1.1508950169059138,
+      "poisson": 1.141584651779422,
+      "bayes:gamma-poisson": 1.2210716699818942,
+      "bayes:gaussian-rating": 1.3647395012635863,
+      "logistic": 0.8952580953662741,
+      "gradient-boosting": 1.2042860343845923,
+      "ensemble:mean": 1.0573221636136572
+    },
+    "basketball": {
+      "baseline:base-rate": 1.8378055456268538,
+      "elo": 1.034961431759475,
+      "bayes:gaussian-rating": 1.23966330107101,
+      "logistic": 1.2425059634072217,
+      "gradient-boosting": 1.341426991570479,
+      "ensemble:mean": 1.1378577131089338
+    },
+    "tennis": {
+      "baseline:base-rate": 2.014687343930353,
+      "elo": 1.2693286141409115,
+      "bayes:gaussian-rating": 1.32588452055628,
+      "logistic": 1.1442974679883002,
+      "gradient-boosting": 1.1102860134484125,
+      "baseline:rank-logit": 0.9912286395963648,
+      "ensemble:mean": 1.1505140689269029
+    }
+  },
+  "live_ht": {
+    "second_half_share": 0.5385710894849276,
+    "prior_weight": 18.31741683694395,
+    "by_split": {
+      "test": {
+        "n": 760,
+        "live_ht": {
+          "n": 760,
+          "log_loss": 0.865733829424456,
+          "brier": 0.507106124544694,
+          "accuracy": 0.6171052631578947,
+          "ece": 0.046796987615367824,
+          "rps": 0.16412235761491992
+        },
+        "prematch": {
+          "n": 760,
+          "log_loss": 1.0463879931151203,
+          "brier": 0.6189404512935565,
+          "accuracy": 0.4881578947368421,
+          "ece": 0.0357918288556274,
+          "rps": 0.21273825437755575
+        },
+        "diff_ll": {
+          "mean_diff": -0.18065416369066425,
+          "lo": -0.23184759424390983,
+          "hi": -0.13044098520638597,
+          "p_better": 1.0
+        }
+      },
+      "train": {
+        "n": 1520,
+        "live_ht": {
+          "n": 1520,
+          "log_loss": 0.7999068055861992,
+          "brier": 0.46568918776102014,
+          "accuracy": 0.6407894736842106,
+          "ece": 0.030248109349738816,
+          "rps": 0.1510352700571059
+        },
+        "prematch": {
+          "n": 1520,
+          "log_loss": 0.9941447164126104,
+          "brier": 0.5896381725364316,
+          "accuracy": 0.5256578947368421,
+          "ece": 0.019205213421104046,
+          "rps": 0.20700020257775525
+        },
+        "diff_ll": {
+          "mean_diff": -0.19423791082641126,
+          "lo": -0.2264871232810101,
+          "hi": -0.16306784570168395,
+          "p_better": 1.0
+        }
+      },
+      "validation": {
+        "n": 380,
+        "live_ht": {
+          "n": 380,
+          "log_loss": 0.8007620415734179,
+          "brier": 0.4732968428274351,
+          "accuracy": 0.6236842105263158,
+          "ece": 0.045432177356666076,
+          "rps": 0.154721119336276
+        },
+        "prematch": {
+          "n": 380,
+          "log_loss": 0.9213810828197556,
+          "brier": 0.542470441740382,
+          "accuracy": 0.5921052631578947,
+          "ece": 0.028816354997805427,
+          "rps": 0.187863130007067
+        },
+        "diff_ll": {
+          "mean_diff": -0.12061904124633771,
+          "lo": -0.18223402277170092,
+          "hi": -0.058099783266832405,
+          "p_better": 0.9995
+        }
+      }
+    }
+  },
+  "montecarlo": {
+    "max_abs_err_vs_analytic": 0.005756361544125094,
+    "mean_abs_err": 0.002618352092713673,
+    "n_matches": 50,
+    "sims_per_match": 20000,
+    "same_seed_identical": true,
+    "different_seed_differs": true
+  },
+  "basketball_live_sigma": {
+    "sigma_full": 11.583203684254755,
+    "n_games": 14208
+  },
+  "runtime_seconds": 1201.3
+}
