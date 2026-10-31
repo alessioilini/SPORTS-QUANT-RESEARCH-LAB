@@ -46,7 +46,7 @@ python -m pip install -q --upgrade pip
 pip install -q -r requirements.txt
 pip install -q -r requirements-vendor.txt
 pip install -q -e .
-python scripts/install_skills.py
+python scripts/install_skills.py || echo "WARNING: skill sync reported problems (see above); the lab itself is installed."
 mkdir -p "$HOME/AI-Lab"
 if [ ! -e "$HOME/AI-Lab/sports-research" ]; then ln -s "$ROOT" "$HOME/AI-Lab/sports-research"; fi
 echo "== done. Next: . .venv/bin/activate && python scripts/fetch_data.py && python scripts/build_db.py"

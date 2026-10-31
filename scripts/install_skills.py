@@ -19,9 +19,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -99,8 +101,16 @@ EXCLUDED: dict[str, dict[str, str]] = {
 }
 
 
+class GitError(RuntimeError):
+    pass
+
+
 def sh(*args: str, cwd: Path | None = None) -> str:
-    return subprocess.run(args, cwd=cwd, check=True, capture_output=True, text=True).stdout.strip()
+    env = {**os.environ, "GIT_TERMINAL_PROMPT": "0"}          # never hang on a credential prompt
+    r = subprocess.run(args, cwd=cwd, capture_output=True, text=True, env=env)
+    if r.returncode != 0:
+        raise GitError(f"{' '.join(args[:3])} ... exit {r.returncode}: {(r.stderr or r.stdout).strip()[:400]}")
+    return r.stdout.strip()
 
 
 IGNORED = (".git", ".github", "tests", "tools", "__pycache__")
@@ -123,16 +133,30 @@ def skill_name(skill_md: Path) -> str:
     raise ValueError(f"no name: in {skill_md}")
 
 
-def ensure_clone(cache: Path, repo: str, sha: str) -> Path:
+def ensure_clone(cache: Path, repo: str, sha: str, attempts: int = 3) -> Path | None:
+    """Clone/checkout the pinned commit into the cache. Returns None if upstream is unreachable."""
     dest = cache / repo.replace("/", "__")
-    if not dest.exists():
-        sh("git", "clone", "--quiet", f"https://github.com/{repo}.git", str(dest))
-    head = sh("git", "rev-parse", "HEAD", cwd=dest)
-    if head != sha:
-        sh("git", "fetch", "--quiet", "origin", sha, cwd=dest)
-        sh("git", "checkout", "--quiet", sha, cwd=dest)
-    assert sh("git", "rev-parse", "HEAD", cwd=dest) == sha, f"{repo} not at pinned {sha}"
-    return dest
+    last = None
+    for i in range(attempts):
+        try:
+            if dest.exists():
+                try:
+                    sh("git", "rev-parse", "HEAD", cwd=dest)
+                except GitError:                       # broken leftover from an interrupted clone
+                    shutil.rmtree(dest)
+            if not dest.exists():
+                sh("git", "clone", "--quiet", f"https://github.com/{repo}.git", str(dest))
+            if sh("git", "rev-parse", "HEAD", cwd=dest) != sha:
+                sh("git", "fetch", "--quiet", "origin", sha, cwd=dest)
+                sh("git", "checkout", "--quiet", sha, cwd=dest)
+            if sh("git", "rev-parse", "HEAD", cwd=dest) != sha:
+                raise GitError(f"{repo} not at pinned {sha}")
+            return dest
+        except GitError as e:
+            last = e
+            time.sleep(2 ** i)
+    print(f"WARNING: cannot fetch {repo}@{sha[:7]} ({last}).")
+    return None
 
 
 def main() -> int:
@@ -146,11 +170,28 @@ def main() -> int:
     SKILLS_DIR.mkdir(parents=True, exist_ok=True)
     LICENSE_DIR.mkdir(parents=True, exist_ok=True)
 
+    prev = json.loads(LOCK_FILE.read_text()) if LOCK_FILE.exists() else {}
+    prev_by_name = {s["name"]: s for s in prev.get("installed", [])}
     lock = {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "installed": [], "conflicts": [], "excluded": EXCLUDED, "repos": REPOS}
     seen_names: dict[str, str] = {}
+    unreachable = []
     for repo, sha in REPOS.items():
         src_repo = ensure_clone(cache, repo, sha)
+        if src_repo is None:
+            # Upstream unreachable: verify the already-installed copies against the pinned lock hashes.
+            unreachable.append(repo)
+            for s_prev in [p for p in prev.get("installed", []) if p["repo"] == repo]:
+                dst = SKILLS_DIR / s_prev["name"]
+                ok = dst.exists() and s_prev.get("commit") == sha and dir_hash(dst) == s_prev["sha256"]
+                if ok:
+                    lock["installed"].append({**s_prev, "status": "unchanged"})
+                    print(f"{'verified':9} {s_prev['name']:28} (offline: matches skills.lock.json)")
+                else:
+                    lock["conflicts"].append({"name": s_prev["name"], "repo": repo,
+                                              "reason": "upstream unreachable and local copy missing/modified"})
+                    print(f"CONFLICT {s_prev['name']}: upstream unreachable and local copy missing/modified")
+            continue
         lic = src_repo / "LICENSE"
         if lic.exists() and not a.dry_run:
             shutil.copyfile(lic, LICENSE_DIR / f"{repo.replace('/', '__')}.LICENSE")
@@ -182,8 +223,13 @@ def main() -> int:
                                       "sha256": dir_hash(dst) if dst.exists() else src_hash,
                                       "status": status})
             print(f"{status:9} {name:28} <- {repo}@{sha[:7]}:{rel}")
-    if not a.dry_run:
+    def body(d):
+        return {k: v for k, v in d.items() if k != "generated_at"}
+    if not a.dry_run and not unreachable and body(lock) != body(prev):   # avoid timestamp-only churn
         LOCK_FILE.write_text(json.dumps(lock, indent=2) + "\n")
+    if unreachable:
+        print(f"\nNOTE: {len(unreachable)} upstream repo(s) unreachable; installed copies were verified offline. "
+              "Re-run later to re-sync: python scripts/install_skills.py")
     print(f"\n{len(lock['installed'])} skills, {len(lock['conflicts'])} conflicts -> {LOCK_FILE.name}")
     return 1 if lock["conflicts"] else 0
 
